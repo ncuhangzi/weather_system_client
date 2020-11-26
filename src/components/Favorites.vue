@@ -1,5 +1,5 @@
 <template>
-  <h1>fav</h1>
+  <h1>zby</h1>
 </template>
 
 <script>
