@@ -41,7 +41,8 @@ export default {
 
         }
     }
-
+//send: username, [post] like
+//recieve: [get]userfavlist, spot 
 }
 </script>
 

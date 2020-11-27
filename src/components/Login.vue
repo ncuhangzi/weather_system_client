@@ -1,5 +1,5 @@
 <template>
-  <h1>zby</h1>
+  
 </template>
 
 <script>
@@ -7,8 +7,9 @@ export default {
 
 
 
-//send: username, [post] like
-//recieve: [get]userfavlist, spot 
+
+//send:[post] username, password
+//recieve: token, login result
 }
 </script>
 
