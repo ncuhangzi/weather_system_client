@@ -33,6 +33,7 @@ export default {
             // 設定是否讓使用者可以切換地圖樣式：一般、衛星圖等
             mapTypeControl: false
             });
+            
         },
         setMarker() {
             // 建立一個新地標
@@ -43,6 +44,8 @@ export default {
                 map: this.map
             });
         },
+        //send:city
+        //recieve:[get] spot,userfavlist
     },
 }
 </script>
