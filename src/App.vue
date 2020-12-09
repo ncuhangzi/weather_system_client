@@ -11,7 +11,7 @@
 
 <script>
 import Navbar from './components/Navbar.vue'
-//import Map from './components/Map.vue'
+//import Map from './components/'
 
 export default {
   name: 'App',

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Map from './components/Map.vue'
+// import Map from './components/Map.vue'
 import Favorites from './components/Favorites.vue'
 import Popular from './components/Popular.vue'
 
