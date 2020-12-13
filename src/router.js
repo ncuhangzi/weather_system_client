@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Map from './components/Map.vue'
 import Favorites from './components/Favorites.vue'
 import Popular from './components/Popular.vue'
+import Spotpage from './components/Spotpage.vue'
+import Login from './components/Login.vue'
 
 Vue.use(Router)
 
@@ -29,6 +31,16 @@ const router = new Router({
       path: '/popular',
       name: 'popular',
       component: Popular
+    },
+    {
+      path: '/spot',
+      name: 'spot',
+      component: Spotpage
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
   ],
 })

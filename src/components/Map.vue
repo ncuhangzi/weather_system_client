@@ -3,12 +3,16 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     data(){
         return{
             map: null,
             lat: 25.0325917,
             lng: 121.5624999,
+            spots: [],
+            location: '',
         }
 
     },
@@ -44,6 +48,28 @@ export default {
                 map: this.map
             });
         },
+        selectloc(){
+            this.getSpot();
+        },
+        getSpot(){
+          axios({
+              method: 'get',
+              url: process.env.WEATHER_API + 'api/spot',
+              headers : { 
+                'accessToken': sessionStorage.getItem('accessToken'), 
+                'location': this.location,
+              },
+
+            }).catch(function (error) {
+                          // alert(error)
+                          console.log(error);    
+            }).then((res)=>{
+
+              this.spots = res.data
+                           
+            })
+        },
+
         //send:city
         //recieve:[get] spot,userfavlist
     },
