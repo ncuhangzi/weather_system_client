@@ -34,15 +34,12 @@ export default {
     methods:{
         addtofav(){
             const h = this.$createElement;
-
             this.$notify({
             title: '通知',
             message: h('i', { style: 'color: teal'}, '已將'+this.Spot.name+'加入收藏！')
             });
         },
-
     },
-
 }
 </script>
 
