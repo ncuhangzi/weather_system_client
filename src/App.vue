@@ -19,7 +19,6 @@ import Navbar from './components/Navbar.vue'
 export default {
   name: 'App',
   components: {
-      
       Navbar
   },
   created(){
@@ -41,18 +40,23 @@ export default {
   
 }
   .el-header {
-    background-color: #B3C0D1;
+    background-color:#90B0CA;
     color: #333;
     text-align: center;
     line-height: 60px;
+
   }
   body > .el-container {
     margin-bottom: 0px;
+
+    
+    
   }
   .el-main {
     background-color: #E9EEF3;
     color: #333;
     text-align: center;
+
     
   }
 
