@@ -1,7 +1,9 @@
 <template>
     <div>
         <div v-for="spot in spots" :key="spot.name">
-            <SpotItem :spot="spot"/>
+            <transition name="el-zoom-in-top">
+                <SpotItem :spot="spot"/>
+            </transition>
 
         </div>
     </div>

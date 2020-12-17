@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header><Navbar/></el-header>
+      <el-header height="120px"><Navbar/></el-header>
       <!--<el-main><Map/></el-main> -->
-      <el-main><router-view></router-view></el-main>
+
+        <el-main class="main"><router-view></router-view></el-main>
+
       
     </el-container>
   </div>
@@ -12,11 +14,18 @@
 <script>
 import Navbar from './components/Navbar.vue'
 //import Map from './components/Map.vue'
+//import axios from 'axios'
 
 export default {
   name: 'App',
   components: {
       Navbar
+  },
+  created(){
+    
+  },
+  methods:{
+
   }
 }
 </script>
