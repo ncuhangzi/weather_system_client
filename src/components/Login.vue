@@ -1,14 +1,26 @@
 <template>
-<div>
-    <input v-model="username">
-    {{username}}
-    <el-button type="primary" round>登入</el-button>
+<div class="loginform">
+    {{test}}
+
+    <el-form :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+    <el-form-item label="E-mail" prop="email" label-width="100px">
+        <el-input v-model="username"></el-input>
+    </el-form-item>
+    <el-form-item label="密碼" prop="password">
+        <el-input v-model="password" show-password></el-input>
+    </el-form-item>
+    <el-form-item>
+        <el-button type="primary" round @click="submit">登入</el-button>
+    </el-form-item>
+    </el-form>
+
 </div>
   
 </template>
 
 <script>
 import axios from 'axios'
+import {API_BASE_URL} from './config.js'
 
 export default {
     name:'login',
@@ -17,11 +29,22 @@ export default {
             token: '',
             username: '',
             password: '',
+            test: [],
+            rules: {
+                email: [
+                    { required: true, message: '請輸入正確email格式', trigger: 'blur' },
+                    { min:0, max: 30, message: '長度須小於30字元', trigger: 'blur' }
+                ],
+                password: [
+                    { required: true, message: '密碼不得留空', trigger: 'change' }
+                ]
+            },
 
         }
     },
     mounted(){
         this.checklogin();
+        this.gettest();
     },
     methods:{
         checklogin(){
@@ -39,7 +62,7 @@ export default {
         submit(){
           axios({
               method: 'post',
-              url: process.env.WEATHER_API + 'api/login',
+              url: API_BASE_URL + '/login',
               headers : { 
                 'username' : this.username,
                 'password' : this.password,
@@ -56,7 +79,25 @@ export default {
               this.token = res.data.token
                            
             })
-        }
+        },
+        gettest(){
+          axios({
+              method: 'get',
+              url: API_BASE_URL + '/test',
+              headers : { 
+
+              },
+
+            }).catch(function (error) {
+                          // alert(error)
+                          console.log(error);    
+            }).then((res)=>{
+                console.log(res)
+
+              this.test = res.data
+                           
+            })
+        },
     }
 
 
@@ -68,5 +109,8 @@ export default {
 </script>
 
 <style>
-
+.loginform{
+    width: 500px;
+    margin:0px auto;
+}
 </style>
