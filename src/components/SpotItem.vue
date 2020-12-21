@@ -163,6 +163,10 @@ export default {
     text-align: left;
     text-indent: 50px;
     padding: 20px 25px 25px 25px;
+    height: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .imagediv{
     padding-top: 20px;

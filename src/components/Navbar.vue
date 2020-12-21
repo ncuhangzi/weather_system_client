@@ -20,6 +20,16 @@
               景點天氣收藏系統
           </div>
       </el-col>
+      <el-col :span="8" >
+          <div class="grid-content"></div>
+      </el-col>
+      <el-col :span="4" > 
+          <a href="javascript:;" @click="logout">
+          <div v-if="visible" class="logout">   
+              登出
+          </div>
+           </a>
+      </el-col>
   </el-row>
   <el-row :gutter="12">
     <el-col :span="4"><div class="grid-content bg-purple">      
@@ -55,14 +65,25 @@ export default {
             opened: false,
             logourl: "https://i.ibb.co/V2mXwbq/storm.png",
             //logourl: "./assets/storm.png"
+            visible: true,
         }
 
+    },
+    mounted(){
+        const Islogin =  sessionStorage.getItem('token') == 'Imlogin';
+        if(Islogin){
+            this.visible = true;
+        }
     },
     methods: {
         to(path) {
             this.opened = false;
             this.$router.push({path: path});
         }, 
+        logout(){
+            sessionStorage.removeItem('token');
+            this.$router.push('/login');
+        }
     },
 
 }
@@ -99,6 +120,11 @@ export default {
     .logo{
         height: 60px;
         width: 60px;
+    }
+    .logout{
+        font-size: 1.5em;
+       
+        color: #333333;
     }
 
 </style>
