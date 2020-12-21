@@ -25,9 +25,9 @@
       </el-col>
       <el-col :span="4" > 
           <a href="javascript:;" @click="logout">
-          <div v-if="visible" class="logout">   
+          <span v-if="visible" class="logout">   
               登出
-          </div>
+          </span>
            </a>
       </el-col>
   </el-row>

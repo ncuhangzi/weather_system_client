@@ -18,7 +18,7 @@
                 <el-row ><el-col :span="10"><span class="spotname">{{Spot.name}}</span></el-col>
                          <el-col :span="10"><span class="city">{{Spot.city}}</span></el-col>               
                 </el-row>
-                <el-row ><div class="info">{{Spot.info}}</div></el-row>
+                <el-row ><div class="info"><v-clamp autoresize :max-lines="5">{{Spot.info}}</v-clamp></div></el-row>
             
               </el-col>
         </a>
@@ -42,20 +42,26 @@
 
 <script>
 import axios from 'axios'
+import VClamp from 'vue-clamp'
 
 export default {
     name:'spotitem',
     props: ["Spot"],
+    components: {
+      VClamp
+    },
     data(){
         return{
             url: "https://www.meway.com.tw/jp/wp-content/uploads/2016/05/%E5%B7%A5%E4%BA%8B%E4%B8%AD.png",
             state: this.Spot.state,
             costate: this.Spot.state,
+            info: this.Spot.info,
             path: '',
         }
     },
     mounted(){
       if(this.state == false){this.costate = true}
+      
     },
     watch:{
       state: function(){
@@ -163,10 +169,8 @@ export default {
     text-align: left;
     text-indent: 50px;
     padding: 20px 25px 25px 25px;
-    height: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    height: 4.5em;
+
   }
   .imagediv{
     padding-top: 20px;
