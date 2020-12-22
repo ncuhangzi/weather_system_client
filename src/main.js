@@ -17,6 +17,19 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 
+
+// router.beforeEach((to, from, next)=>{
+//   const isLogin = sessionStorage.getItem('token') == 'Imlogin' ;
+//   if( isLogin ){
+//     next();
+//   } else {
+//     if( to.path !== '/login')
+//       next('/login');
+//     else
+//       next();
+//   }
+// });
+
 new Vue({
   router,
   render: h => h(App),

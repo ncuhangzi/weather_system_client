@@ -1,7 +1,5 @@
 <template>
-<div class="loginform">
-    {{test}}
-
+  <div class="loginform">
     <el-form :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
     <el-form-item label="E-mail" prop="email" label-width="100px">
         <el-input v-model="username"></el-input>
@@ -10,8 +8,8 @@
         <el-input v-model="password" show-password></el-input>
     </el-form-item>
     <el-form-item>
-        <el-button type="text" round @click="to('/register')">建立帳號</el-button>
-        <el-button type="primary" round @click="submit">登入</el-button>
+        <el-button type="text" round @click="to('/login')">登入</el-button>
+        <el-button type="primary" round @click="submit">註冊</el-button>
     </el-form-item>
     </el-form>
 
@@ -52,10 +50,19 @@ export default {
         checklogin(){
 
         },
-        submit(){
+        login(){
+            //write login authencation logic here!
+            if( this.userName == 'abcd' && this.password == '1234' ){
+            sessionStorage.setItem('token', 'ImLogin')
+            this.$router.push('/');
+            } else{
+            alert('login failed')
+            }
+        },
+        register(){
           axios({
               method: 'post',
-              url: API_BASE_URL + '/login',
+              url: API_BASE_URL + '/register',
               headers : { 
                 'username' : this.username,
                 'password' : this.password,
@@ -70,30 +77,6 @@ export default {
             }).then((res)=>{
 
               this.token = res.data.token
-                //write login authencation logic here!
-                if( this.token == 'Imlogin' ){
-                sessionStorage.setItem('token', 'Imlogin')
-                this.$router.push('/');
-                } else{
-                alert('login failed')
-                }           
-            })
-        },
-        gettest(){
-          axios({
-              method: 'get',
-              url: API_BASE_URL + '/test',
-              headers : { 
-
-              },
-
-            }).catch(function (error) {
-                          // alert(error)
-                          console.log(error);    
-            }).then((res)=>{
-                console.log(res)
-
-              this.test = res.data
                            
             })
         },
@@ -103,17 +86,9 @@ export default {
         },
     }
 
-
-
-
-//send:[post] username, password
-//recieve: token, login result
 }
 </script>
 
 <style>
-.loginform{
-    width: 500px;
-    margin:0px auto;
-}
+
 </style>
