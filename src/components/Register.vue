@@ -9,7 +9,7 @@
     </el-form-item>
     <el-form-item>
         <el-button type="text" round @click="to('/login')">登入</el-button>
-        <el-button type="primary" round @click="submit">註冊</el-button>
+        <el-button type="primary" round @click="register">註冊</el-button>
     </el-form-item>
     </el-form>
 
@@ -64,18 +64,18 @@ export default {
               method: 'post',
               url: API_BASE_URL + '/register',
               headers : { 
-                'username' : this.username,
-                'password' : this.password,
+
               },
               data: {
-
+                'email' : this.username,
+                'password' : this.password,
               },
 
             }).catch(function (error) {
                           // alert(error)
                           console.log(error);    
             }).then((res)=>{
-
+                console.log(res)
               this.token = res.data.token
                            
             })

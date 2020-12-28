@@ -29,6 +29,7 @@
 
 <script>
 import axios from 'axios'
+import {API_BASE_URL} from './config.js'
 
 export default {
     name:'spotside',
@@ -79,10 +80,8 @@ export default {
         updatestate(){
             axios({
                 method: 'put',
-                url: process.env.WEATHER_API + 'api/like',
+                url: API_BASE_URL + '/update_fav/'+this.Spot.id,
                 headers : { 
-                    'accessToken': sessionStorage.getItem('accessToken'),
-                    'spotid': this.Spot.name 
                     
                 },
 

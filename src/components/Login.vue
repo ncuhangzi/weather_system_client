@@ -57,19 +57,20 @@ export default {
               method: 'post',
               url: API_BASE_URL + '/login',
               headers : { 
-                'username' : this.username,
-                'password' : this.password,
+
               },
               data: {
-
+                'email' : this.username,
+                'password' : this.password,
               },
 
             }).catch(function (error) {
                           // alert(error)
                           console.log(error);    
             }).then((res)=>{
+                console.log(res)
 
-              this.token = res.data.token
+              this.token = res.data
                 //write login authencation logic here!
                 if( this.token == 'Imlogin' ){
                 sessionStorage.setItem('token', 'Imlogin')
