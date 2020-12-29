@@ -46,10 +46,16 @@
         </div>
 
         <el-drawer
-        title="相關景點推薦" :visible.sync="drawer" :direction="'ltr'" :before-close="handleClose" size='50%'>
-            <h1>{{location}}的熱門景點：</h1>
-            <div v-for="spot in spots" :key="spot.name">
-                    <Spotside :Spot="spot"/>                
+        title="相關景點推薦" :visible.sync="drawer" :direction="'ltr'" :before-close="handleClose" :with-header="false" size='50%'>
+            <el-row><span class="city">{{location}}</span><span class="stext"> 的熱門景點：</span></el-row>
+            <div class="spotsection" >
+            <vuescroll>
+            <div  v-for="spot in spots" :key="spot.name">
+                
+                    <Spotside :Spot="spot"/>      
+                       
+            </div>
+            </vuescroll>
             </div>
             
         </el-drawer>
@@ -60,37 +66,23 @@
 <script>
 import axios from 'axios'
 import Spotside from './Spotside.vue'
+import vuescroll from 'vuescroll';
 import {API_BASE_URL} from './config.js'
 
 export default {
     components: {
-        Spotside
+        Spotside,
+        vuescroll
     },
     data(){
         return{
             map: null,
             lat: 25.0325917,
             lng: 121.5624999,
-            spots:[
-                {
-                    name:'Tokyo Tower',
-                    image:'https://img.travel98.com/xl/P_14871_c4a56264d38a3641751286028793f16a_o.jpg',
-                    city:'Tokyo',
-                    info:'東京鐵塔是位於日本東京芝公園的電波塔。其以巴黎艾菲爾鐵塔為範本而建造，高333公尺，比前者高13公尺，完工以來即成為東京著名地標與觀光景點。正式名稱為日本電波塔，這同時也是其營運機構的舊稱。目前為日本第二高的結構物，僅次於東京晴空塔。1958年，外表一根根交錯複雜像蜘蛛網結構的建築物，開始聳立於東京，成為最耀眼的日本地標「東京鐵塔」，它是廣播電視電波塔，全長高度有333公尺，分成塔下的大樓「Foottown」、「大展望台」即「Main Deck」位於150公尺、「特別展望台」位於250公尺，在經過一段時間的裝修後，將其新命名為「Top Deck」。',
-                    count: 0,
-                    state:false,
-                    
-                },
-                {
-                    name:'Tokyo Power',
-                    image:'https://img.travel98.com/xl/P_14871_c4a56264d38a3641751286028793f16a_o.jpg',
-                    city:'Tokyo',
-                    info:'東京鐵塔是位於日本東京芝公園的電波塔。其以巴黎艾菲爾鐵塔為範本而建造，高333公尺，比前者高13公尺，完工以來即成為東京著名地標與觀光景點。正式名稱為日本電波塔，這同時也是其營運機構的舊稱。目前為日本第二高的結構物，僅次於東京晴空塔。1958年，外表一根根交錯複雜像蜘蛛網結構的建築物，開始聳立於東京，成為最耀眼的日本地標「東京鐵塔」，它是廣播電視電波塔，全長高度有333公尺，分成塔下的大樓「Foottown」、「大展望台」即「Main Deck」位於150公尺、「特別展望台」位於250公尺，在經過一段時間的裝修後，將其新命名為「Top Deck」。',
-                    count: 0,
-                    state:false,
-                    
-                },
-            ],
+            ops:{
+
+            },
+            spots:[],
             location: '',
             drawer: false,
         }
@@ -132,7 +124,7 @@ export default {
             //console.log('current env:'+process.env.WEATHER_API)
             this.drawer = true;
             this.location = value;
-            this.getSpot();
+            //this.getSpot();
         },
         getSpot(){
           axios({
@@ -159,12 +151,31 @@ export default {
 }
 </script>
 
-<style scoped>
-.google-map {
-  width: 100%;
-  height: 400px;
-}
+<style>
+
 .imgarea{
     background-color: white;
 }
+.spotsection{
+    height: 100%;
+    overflow:auto;
+}
+.el-drawer__body {
+    height: 100%;
+	box-sizing: border-box;
+	overflow-y: auto;
+    
+}
+.city{
+    font-size: 3em;
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: left;
+    color: #999999;
+}
+.stext{
+    font-weight:bold;
+    font-size: 1.5em;
+}
+
+
 </style>

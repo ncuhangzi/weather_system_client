@@ -1,7 +1,6 @@
 <template>
-  <div class="loginform">
-    {{ test }}
-
+<div>
+  <div class="loginform" v-if="showlogin">
     <el-form
       :rules="rules"
       :model="ruleForm"
@@ -16,7 +15,7 @@
         <el-input v-model="ruleForm.password" show-password></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="text" round @click="to('/register')"
+        <el-button type="text" round @click="toggle()"
           >建立帳號</el-button
         >
         <el-button type="primary" round @click="submitForm('ruleForm')"
@@ -25,6 +24,22 @@
       </el-form-item>
     </el-form>
   </div>
+  <div class="regisform" v-if="showregis">
+    <el-form :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+    <el-form-item label="E-mail" prop="email" label-width="100px">
+        <el-input v-model="username"></el-input>
+    </el-form-item>
+    <el-form-item label="密碼" prop="password">
+        <el-input v-model="password" show-password></el-input>
+    </el-form-item>
+    <el-form-item>
+        <el-button type="text" round @click="toggle()">我要登入</el-button>
+        <el-button type="primary" round @click="register">註冊</el-button>
+    </el-form-item>
+    </el-form>
+
+  </div>
+</div>
 </template>
 
 <script>
@@ -39,6 +54,8 @@ export default {
       username: "",
       password: "",
       test: [],
+      showlogin: true,
+      showregis: false,
 
       ruleForm: {
         email: "",
@@ -62,8 +79,11 @@ export default {
     this.gettest();
   },
   methods: {
-    checklogin() {},
-        submit(){
+    checklogin() {
+
+    },
+    //login function
+    submit(){
           axios({
               method: 'post',
               url: API_BASE_URL + '/login',
@@ -85,31 +105,53 @@ export default {
                 //write login authencation logic here!
                 if( this.token == 'Imlogin' ){
                 sessionStorage.setItem('token', 'Imlogin')
+                sessionStorage.setItem('username', this.username)
                 this.$router.push('/');
                 } else{
                 alert('login failed')
                 }           
             })
-        },
-    gettest() {
-      axios({
-        method: "get",
-        url: API_BASE_URL + "/test",
-        headers: {},
-      })
-        .catch(function (error) {
-          // alert(error)
-          console.log(error);
-        })
-        .then((res) => {
-          console.log(res);
-
-          this.test = res.data;
-        });
     },
+
+    //register function
+    register(){
+          axios({
+              method: 'post',
+              url: API_BASE_URL + '/register',
+              headers : { 
+
+              },
+              data: {
+                'email' : this.username,
+                'password' : this.password,
+              },
+
+            }).catch(function (error) {
+                          // alert(error)
+                          console.log(error);    
+            }).then((res)=>{
+              console.log(res)
+              //根據回傳判斷是否註冊成功
+                sessionStorage.setItem('token', 'Imlogin')
+                sessionStorage.setItem('username', this.username)
+                this.$router.push('/');
+              
+                           
+            })
+    },
+    //general function
     to(path) {
       this.opened = false;
       this.$router.push({ path: path });
+    },
+    toggle(){
+      if(this.showlogin == true){
+        this.showregis = true;
+        this.showlogin = false;
+      }else if(this.showregis == true){
+        this.showregis = false;
+        this.showlogin = true;
+      }
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
@@ -130,6 +172,10 @@ export default {
 
 <style>
 .loginform {
+  width: 500px;
+  margin: 0px auto;
+}
+.regisform {
   width: 500px;
   margin: 0px auto;
 }

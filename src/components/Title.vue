@@ -9,7 +9,7 @@
 
 </template>
 
-<style >
+<style scoped>
     .el-row {
         widows: 100%;
         overflow: auto;

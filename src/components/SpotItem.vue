@@ -43,6 +43,7 @@
 <script>
 import axios from 'axios'
 import VClamp from 'vue-clamp'
+import {API_BASE_URL} from './config.js'
 
 export default {
     name:'spotitem',
@@ -113,25 +114,25 @@ export default {
       
     },
     updatestate(){
-        axios({
-              method: 'patch',
-              url: process.env.WEATHER_API + 'api/like',
-              headers : { 
-                'accessToken': sessionStorage.getItem('accessToken'),
-                'spotid': this.Spot.name 
-                
-              },
+              axios({
+                  method: 'put',
+                  url: API_BASE_URL + '/update_fav/'+this.Spot.id,
+                  headers : { 
+                      
+                  },
+                    'state': this.state,
+                    'username': sessionStorage.getItem('username')
 
-            }).catch(function (error) {
-                          // alert(error)
-                          console.log(error);    
-            }).then((res)=>{
+                  }).catch(function (error) {
+                              // alert(error)
+                              console.log(error);    
+                  }).then((res)=>{
 
-              this.spots = res.data.spots
-                           
-            })
+                  console.log(res)
+                              
+                  })
 
-    },
+     },
 
     },
 }

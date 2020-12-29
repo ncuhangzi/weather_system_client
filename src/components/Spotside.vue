@@ -84,13 +84,15 @@ export default {
                 headers : { 
                     
                 },
+                  'state': this.state,
+                  'username': sessionStorage.getItem('username')
 
                 }).catch(function (error) {
                             // alert(error)
                             console.log(error);    
                 }).then((res)=>{
 
-                this.spots = res.data.spots
+                console.log(res)
                             
                 })
 
