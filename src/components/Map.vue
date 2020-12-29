@@ -60,6 +60,7 @@
 <script>
 import axios from 'axios'
 import Spotside from './Spotside.vue'
+import {API_BASE_URL} from './config.js'
 
 export default {
     components: {
@@ -136,17 +137,17 @@ export default {
         getSpot(){
           axios({
               method: 'get',
-              url: process.env.WEATHER_API + 'api/spot',
-              headers : { 
-                'accessToken': sessionStorage.getItem('accessToken'), 
-                'location': this.location,
+              url: API_BASE_URL + '/select_spots/'+this.location,
+              headers : {  
+ 
               },
 
             }).catch(function (error) {
                           // alert(error)
                           console.log(error);    
             }).then((res)=>{
-
+              console.log(res)
+              this.spots = []
               this.spots = res.data
                            
             })

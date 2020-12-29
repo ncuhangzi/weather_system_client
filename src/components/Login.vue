@@ -63,31 +63,34 @@ export default {
   },
   methods: {
     checklogin() {},
-    submit() {
-      axios({
-        method: "post",
-        url: API_BASE_URL + "/login",
-        headers: {
-          username: this.username,
-          password: this.password,
+        submit(){
+          axios({
+              method: 'post',
+              url: API_BASE_URL + '/login',
+              headers : { 
+
+              },
+              data: {
+                'email' : this.username,
+                'password' : this.password,
+              },
+
+            }).catch(function (error) {
+                          // alert(error)
+                          console.log(error);    
+            }).then((res)=>{
+                console.log(res)
+
+              this.token = res.data
+                //write login authencation logic here!
+                if( this.token == 'Imlogin' ){
+                sessionStorage.setItem('token', 'Imlogin')
+                this.$router.push('/');
+                } else{
+                alert('login failed')
+                }           
+            })
         },
-        data: {},
-      })
-        .catch(function (error) {
-          // alert(error)
-          console.log(error);
-        })
-        .then((res) => {
-          this.token = res.data.token;
-          //write login authencation logic here!
-          if (this.token == "Imlogin") {
-            sessionStorage.setItem("token", "Imlogin");
-            this.$router.push("/");
-          } else {
-            alert("login failed");
-          }
-        });
-    },
     gettest() {
       axios({
         method: "get",
@@ -108,7 +111,6 @@ export default {
       this.opened = false;
       this.$router.push({ path: path });
     },
-
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
