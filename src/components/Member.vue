@@ -146,7 +146,7 @@ export default {
       },
       rules: {
         nickname: [
-          { required: true, message: "請?入暱稱", trigger: "blur" },
+          { required: true, message: "請輸入暱稱", trigger: "blur" },
           { min: 3, max: 12, message: "長度 3∼12 個字", trigger: "blur" },
         ],
         gender: [{ required: true, message: "請選擇性別", trigger: "blur" }],

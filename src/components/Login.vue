@@ -9,10 +9,10 @@
       class="demo-ruleForm"
     >
       <el-form-item label="E-mail" prop="email" label-width="100px">
-        <el-input v-model="ruleForm.email"></el-input>
+        <el-input v-model="ruleForm.email" size="medium"></el-input>
       </el-form-item>
       <el-form-item label="密碼" prop="password">
-        <el-input v-model="ruleForm.password" show-password></el-input>
+        <el-input v-model="ruleForm.password" show-password size="medium"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="text" round @click="toggle()"
@@ -25,13 +25,34 @@
     </el-form>
   </div>
   <div class="regisform" v-if="showregis">
-    <el-form :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+    <el-form :rules="rules" :model="ruleForm" ref="ruleForm" label-width="100px" class="demo-ruleForm">
     <el-form-item label="E-mail" prop="email" label-width="100px">
-        <el-input v-model="username"></el-input>
+        <el-input v-model="username" size="medium"></el-input>
     </el-form-item>
     <el-form-item label="密碼" prop="password">
-        <el-input v-model="password" show-password></el-input>
+        <el-input v-model="ruleForm.password" show-password size="medium"></el-input>
     </el-form-item>
+    <el-form-item label="暱稱" prop="nickname">
+        <el-input v-model="nickname"  size="medium"></el-input>
+    </el-form-item>
+
+    <el-form-item prop="gender" label="性別">
+            <el-radio-group v-model="ruleForm.gender">
+              <el-radio v-model="sex" label="0">
+                <span
+
+                  >男
+                </span></el-radio
+              >
+
+              <el-radio v-model="sex" label="1">
+                <span
+
+                  >女</span
+                ></el-radio
+              >
+            </el-radio-group>
+          </el-form-item>
     <el-form-item>
         <el-button type="text" round @click="toggle()">我要登入</el-button>
         <el-button type="primary" round @click="register">註冊</el-button>
@@ -53,9 +74,12 @@ export default {
       token: "",
       username: "",
       password: "",
+      nickname: "",
+      sex: '0',
       test: [],
       showlogin: true,
       showregis: false,
+
 
       ruleForm: {
         email: "",
@@ -70,7 +94,16 @@ export default {
         password: [
           { required: true, message: "密碼不得留空", trigger: "change" },
           { min: 8, max: 15, message: "長度須小於8到15字元", trigger: "blur" },
+          {
+            required: true,
+            pattern: /^[a-zA-Z0-9]+$/,
+            message: "請輸入英數字",
+          },
         ],
+        gender: [{ required: true, message: "請選擇性別", trigger: "blur" }],
+        nickname: [
+          { required: true, trigger: "blur" },
+        ]
       },
     };
   },

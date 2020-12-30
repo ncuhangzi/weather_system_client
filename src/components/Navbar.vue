@@ -1,24 +1,22 @@
 <template>
 <div>
-    <el-row  style="background:#cc99ff">
+    <el-row  style="background:#99a9bf">
      <el-row :gutter="12">
       <el-col :span="4">
 
-          <el-button class="title" type="text" @click="to('/')">景點天氣收藏系統</el-button>
+          <el-button class="title" type="text" @click="to('/')">天氣景點收藏系統</el-button>
          
 
       </el-col>
       
 
       <el-col :span="16" >
-          <div class="grid-content"></div>
+          <span class="grid-content"> <h1></h1></span>
       </el-col>
       <el-col :span="4" > 
-          <a href="javascript:;" @click="logout">
-          <span v-if="visible" class="logout">   
-              登出
-          </span>
-           </a>
+ 
+          <el-button v-if="visible" class="logout" type="text" @click="logout">登出</el-button>
+
       </el-col>
   </el-row>
   <!-- <el-row :gutter="12">
@@ -44,7 +42,7 @@
   </el-row> -->
   <!--new version navbar!!!-->
   <el-row>
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"   active-text-color="#cc99ff">
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"   active-text-color="#99a9bf">
           <el-menu-item index="1" @click="to('/')">地圖</el-menu-item>
           <el-menu-item index="2" @click="to('/popular')">熱門</el-menu-item>
           <el-menu-item index="3" @click="to('/favorites')">收藏</el-menu-item>
@@ -64,7 +62,7 @@ export default {
             opened: false,
             logourl: "https://i.ibb.co/V2mXwbq/storm.png",
             //logourl: "./assets/storm.png"
-            visible: false,
+            visible: true,
             activeIndex: '1',
         }
 
@@ -93,9 +91,13 @@ export default {
 </script>
 
 <style scoped>
-
+    .grid-content {
+        border-radius: 0px;
+        min-height: 60px;
+        background: #cc99ff;
+    }
     .logout{
-        font-size: 1.5em;
+        font-size: 1em;
         text-decoration: none;
         color: #333333;
     }
