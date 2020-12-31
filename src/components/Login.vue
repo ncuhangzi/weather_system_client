@@ -18,7 +18,7 @@
         <el-button type="text" round @click="toggle()"
           >建立帳號</el-button
         >
-        <el-button type="primary" round @click="submitForm('ruleForm')"
+        <el-button type="primary" round @click="submit"
           >登入</el-button
         >
       </el-form-item>
@@ -27,7 +27,7 @@
   <div class="regisform" v-if="showregis">
     <el-form :rules="rules" :model="ruleForm" ref="ruleForm" label-width="100px" class="demo-ruleForm">
     <el-form-item label="E-mail" prop="email" label-width="100px">
-        <el-input v-model="username" size="medium"></el-input>
+        <el-input v-model="ruleForm.email" size="medium"></el-input>
     </el-form-item>
     <el-form-item label="密碼" prop="password">
         <el-input v-model="ruleForm.password" show-password size="medium"></el-input>
@@ -38,14 +38,14 @@
 
     <el-form-item prop="gender" label="性別">
             <el-radio-group v-model="ruleForm.gender">
-              <el-radio v-model="sex" label="0">
+              <el-radio  label="male">
                 <span
 
                   >男
                 </span></el-radio
               >
 
-              <el-radio v-model="sex" label="1">
+              <el-radio  label="female">
                 <span
 
                   >女</span
@@ -84,6 +84,7 @@ export default {
       ruleForm: {
         email: "",
         password: "",
+        gender: "",
       },
       rules: {
         email: [
@@ -124,8 +125,8 @@ export default {
 
               },
               data: {
-                'email' : this.username,
-                'password' : this.password,
+                'email' : this.ruleForm.email,
+                'password' : this.ruleForm.password,
               },
 
             }).catch(function (error) {
@@ -155,8 +156,10 @@ export default {
 
               },
               data: {
-                'email' : this.username,
-                'password' : this.password,
+                'email' : this.ruleForm.email,
+                'password' : this.ruleForm.password,
+                'name' : this.nickname,
+                'gender' : this.ruleForm.gender,
               },
 
             }).catch(function (error) {
@@ -165,9 +168,12 @@ export default {
             }).then((res)=>{
               console.log(res)
               //根據回傳判斷是否註冊成功
+              if(res.data == 'Success'){
                 sessionStorage.setItem('token', 'Imlogin')
                 sessionStorage.setItem('username', this.username)
                 this.$router.push('/');
+              }
+
               
                            
             })

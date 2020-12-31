@@ -26,17 +26,17 @@ Vue.use(vuescroll, {
 });
 
 
-// router.beforeEach((to, from, next)=>{
-//   const isLogin = sessionStorage.getItem('token') == 'Imlogin' ;
-//   if( isLogin ){
-//     next();
-//   } else {
-//     if( to.path !== '/login')
-//       next('/login');
-//     else
-//       next();
-//   }
-// });
+router.beforeEach((to, from, next)=>{
+  const isLogin = sessionStorage.getItem('token') == 'Imlogin' ;
+  if( isLogin ){
+    next();
+  } else {
+    if( to.path !== '/login')
+      next('/login');
+    else
+      next();
+  }
+});
 
 new Vue({
   router,

@@ -69,7 +69,7 @@ export default {
     },
     mounted(){
         const Islogin =  sessionStorage.getItem('token') == 'Imlogin';
-        if(Islogin){
+        if(Islogin == 'Imlogin'){
             this.visible = true;
         }
     },
