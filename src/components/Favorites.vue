@@ -9,6 +9,7 @@
 <script>
 import Spot from './Spot.vue';
 import axios from 'axios'
+import { API_BASE_URL } from "./config.js";
 
 export default {
     name:'popular',
@@ -18,36 +19,26 @@ export default {
     data(){
         return{
             spots:[
-                {
-                    name:'Tokyo Power',
-                    image:'https://www.meway.com.tw/jp/wp-content/uploads/2016/05/%E5%B7%A5%E4%BA%8B%E4%B8%AD.png',
-                    city:'Tokyo',
-                    info:'I have a pen.',
-                    state:true,
-                    
-                },
-                {
-                    name:'Tokyo Flower',
-                    image:'https://www.meway.com.tw/jp/wp-content/uploads/2016/05/%E5%B7%A5%E4%BA%8B%E4%B8%AD.png',
-                    city:'Tokyo',
-                    info:'I have a pen.',
-                    state:true,
-                    
-                }
             ],
+            username: ''
 
         }
     },
     mounted(){
-      //this.getfav();
+      
+      if(this.username == ''){
+        this.username = sessionStorage.getItem('username')
+        console.log('username is'+this.username)
+      }
+    
+      this.getfav();
     },
     methods:{
       getfav(){
         axios({
               method: 'get',
-              url: process.env.WEATHER_API + 'api/fav',
+              url: API_BASE_URL + '/fav/' + this.username,
               headers : { 
-                'accessToken': sessionStorage.getItem('accessToken'), 
                 
               },
 
@@ -55,7 +46,7 @@ export default {
                           // alert(error)
                           console.log(error);    
             }).then((res)=>{
-
+              console.log(res)
               this.spots = res.data.spots
                            
             })

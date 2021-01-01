@@ -1,7 +1,7 @@
 <template>
   <div>
       <el-row>
-        <a href="javascript:;" @click="toContent(Spot.id, Spot.name, Spot.image, Spot.city, Spot.info, Spot.state)">
+        <a href="javascript:;" @click="toContent(Spot.id, Spot.name, Spot.image, Spot.city, Spot.info, Spot.status, Spot.degree ,Spot.weather)">
           <el-col :span="9"> 
                 <div class="imagediv">
                 <el-image
@@ -36,8 +36,8 @@ export default {
     props: ["Spot"],
     data(){
         return{
-            state: this.Spot.state,
-            costate: this.Spot.state,
+            state: this.Spot.status,
+            costate: this.Spot.status,
         }
     },
     mounted(){
@@ -73,14 +73,14 @@ export default {
               
             }
             //axios update
-            //this.updatestate();
+            this.updatestate();
 
 
         },
         updatestate(){
             axios({
                 method: 'put',
-                url: API_BASE_URL + '/update_fav/'+this.Spot.id,
+                url: API_BASE_URL + '/update/'+this.Spot.id,
                 headers : { 
                     
                 },
@@ -97,7 +97,7 @@ export default {
                 })
 
         },
-        toContent  (id, spotname, image, city, info, state){
+        toContent  (id, spotname, image, city, info, state, degree, weather){
                   
                   this.$router.push({
                   path : '/spot' , 
@@ -107,7 +107,9 @@ export default {
                     image: image,
                     city: city,
                     info: info,
-                    state: state
+                    state: state,
+                    degree: degree, 
+                    weather: weather,
                   }
                 })   
       

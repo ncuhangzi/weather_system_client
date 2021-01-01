@@ -3,7 +3,7 @@
     <transition name="el-zoom-in-top">
        <el-card class="box-card">
          <el-row>
-         <a href="javascript:;" @click="toContent(Spot.name, Spot.image, Spot.city, Spot.info, Spot.state)">
+         <a href="javascript:;" @click="toContent(Spot.id, Spot.name, Spot.image, Spot.city, Spot.info, Spot.status, Spot.degree ,Spot.weather)">
               <el-col :span="6">
                 <div class="imagediv">
                 <el-image
@@ -54,8 +54,8 @@ export default {
     data(){
         return{
             url: "https://www.meway.com.tw/jp/wp-content/uploads/2016/05/%E5%B7%A5%E4%BA%8B%E4%B8%AD.png",
-            state: this.Spot.state,
-            costate: this.Spot.state,
+            state: this.Spot.status,
+            costate: this.Spot.status,
             info: this.Spot.info,
             path: '',
         }
@@ -99,16 +99,19 @@ export default {
 
         },
             //send event parameter to the reward page
-        toContent  (spotname, image, city, info, state){
+        toContent  (id, spotname, image, city, info, state, degree, weather){
                   
                   this.$router.push({
                   path : '/spot' , 
                   query : { 
+                    id: id,
                     spotname: spotname,
                     image: image,
                     city: city,
                     info: info,
-                    state: state
+                    state: state,
+                    degree: degree, 
+                    weather: weather,
                   }
                 })   
       

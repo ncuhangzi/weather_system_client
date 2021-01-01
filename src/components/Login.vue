@@ -139,7 +139,8 @@ export default {
                 //write login authencation logic here!
                 if( this.token == 'Imlogin' ){
                 sessionStorage.setItem('token', 'Imlogin')
-                sessionStorage.setItem('username', this.username)
+                sessionStorage.setItem('username', this.ruleForm.email)
+                console.log('session username: '+sessionStorage.getItem('username'))
                 this.$router.push('/');
                 } else{
                 alert('login failed')

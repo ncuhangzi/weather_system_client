@@ -128,7 +128,8 @@
 </template>
 
 <script>
-//import axios from 'axios'
+import axios from 'axios'
+import {API_BASE_URL} from './config.js'
 
 export default {
   data() {
@@ -153,6 +154,9 @@ export default {
       },
     };
   },
+  mounted:{
+    
+  },
 
   methods: {
     submitForm(formName) {
@@ -165,6 +169,25 @@ export default {
         }
       });
     },
+    getmember(){
+          axios({
+              method: 'get',
+              url: API_BASE_URL + '/member',
+              headers : { 
+
+              },
+            }).catch(function (error) {
+                          // alert(error)
+                          console.log(error);    
+            }).then((res)=>{
+              console.log(res)
+               this.dynamicValidateForm = res.data
+
+              
+                           
+            })     
+
+    }
   },
 
   //send [post]username, email, sex, password, nickname

@@ -124,23 +124,23 @@ export default {
             //console.log('current env:'+process.env.WEATHER_API)
             this.drawer = true;
             this.location = value;
-            //this.getSpot();
+            this.getSpot();
         },
         getSpot(){
           axios({
               method: 'get',
-              url: API_BASE_URL + '/select_spots/'+this.location,
+              url: API_BASE_URL + '/select/'+this.location,
               headers : {  
  
               },
 
             }).catch(function (error) {
                           // alert(error)
-                          console.log(error);    
+                          console.log('error:'+error);    
             }).then((res)=>{
-              console.log(res)
+              console.log(res.data)
               this.spots = []
-              this.spots = res.data
+              this.spots = res.data.spot_info
                            
             })
         },
@@ -163,7 +163,7 @@ export default {
 .el-drawer__body {
     height: 100%;
 	box-sizing: border-box;
-	overflow-y: auto;
+	
     
 }
 .city{

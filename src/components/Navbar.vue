@@ -56,6 +56,9 @@
 </template>
 
 <script>
+import axios from 'axios'
+import {API_BASE_URL} from './config.js'
+
 export default {
     data(){
         return{
@@ -84,6 +87,21 @@ export default {
         logout(){
             sessionStorage.removeItem('token');
             this.$router.push('/login');
+            axios({
+              method: 'post',
+              url: API_BASE_URL + '/logout',
+              headers : {  
+ 
+              },
+
+            }).catch(function (error) {
+                          // alert(error)
+                          console.log('error:'+error);    
+            }).then((res)=>{
+              console.log(res)
+
+                           
+            })
         }
     },
 
