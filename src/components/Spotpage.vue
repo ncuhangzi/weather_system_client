@@ -92,7 +92,7 @@ export default {
       updatestate(){
           axios({
                 method: 'put',
-                url: API_BASE_URL + '/update/'+this.id,
+                url: API_BASE_URL + '/update/'+this.Spot.id+'/'+this.username,
                 headers : { 
 
                 },

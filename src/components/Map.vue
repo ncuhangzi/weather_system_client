@@ -52,7 +52,7 @@
             <vuescroll>
             <div  v-for="spot in spots" :key="spot.name">
                 
-                    <Spotside :Spot="spot"/>      
+                    <Spotside :Spot="spot" :username="username"/>      
                        
             </div>
             </vuescroll>
@@ -85,10 +85,15 @@ export default {
             spots:[],
             location: '',
             drawer: false,
+            username: '',
         }
 
     },
     mounted(){
+      if(this.username == ''){
+        this.username = sessionStorage.getItem('username')
+        console.log('username is'+this.username)
+      }
         //this.initMap();
         //this.setMarker();
     },
@@ -129,7 +134,7 @@ export default {
         getSpot(){
           axios({
               method: 'get',
-              url: API_BASE_URL + '/select/'+this.location,
+              url: API_BASE_URL + '/select/'+this.location+'/'+this.username,
               headers : {  
  
               },

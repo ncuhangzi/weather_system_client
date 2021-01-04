@@ -154,8 +154,9 @@ export default {
       },
     };
   },
-  mounted:{
-    
+  mounted(){
+    this.dynamicValidateForm.email = sessionStorage.getItem('username')
+    this.getmember();
   },
 
   methods: {
@@ -168,11 +169,12 @@ export default {
           return false;
         }
       });
+      this.updatemember();
     },
     getmember(){
           axios({
               method: 'get',
-              url: API_BASE_URL + '/member',
+              url: API_BASE_URL + '/member/'+this.dynamicValidateForm.email,
               headers : { 
 
               },
@@ -181,13 +183,38 @@ export default {
                           console.log(error);    
             }).then((res)=>{
               console.log(res)
-               this.dynamicValidateForm = res.data
+               this.dynamicValidateForm.email = res.data.email
+               this.ruleForm.nickname = res.data.name
+               this.ruleForm.gender = res.data.gender
 
               
                            
             })     
 
-    }
+    },
+    updatemember(){
+        axios({
+              method: 'post',
+              url: API_BASE_URL + '/member/' + this.ruleForm.nickname+'/'+this.ruleForm.gender+'/'+this.dynamicValidateForm.email,
+              headers : { 
+
+              },
+
+            }).catch(function (error) {
+                          // alert(error)
+                          console.log(error);    
+            }).then((res)=>{
+              console.log(res)
+              //根據回傳判斷是否註冊成功
+              if(res.data == true){
+                
+                alert('修改成功!')
+              }
+
+              
+                           
+            })
+    },
   },
 
   //send [post]username, email, sex, password, nickname

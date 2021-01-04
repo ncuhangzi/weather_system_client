@@ -1,7 +1,7 @@
 <template>  
   <div>
     <transition name="el-zoom-in-top">
-        <Spot :spots="spots"/>        
+        <Spot :spots="spots" :username="username"/>        
     </transition>
   </div>
 </template>
@@ -46,9 +46,25 @@ export default {
                           // alert(error)
                           console.log(error);    
             }).then((res)=>{
-              console.log(res)
-              this.spots = res.data.spots
-                           
+              console.log(typeof(res.data))   
+                       
+              let newarray = Array.from(res.data)
+              newarray.forEach((e) => {
+                e.status = true
+                
+              });
+              this.spots = newarray
+              
+              // let newarray = Array.from(res.data).map((element) =>{
+              //   return{
+              //     ...element,
+              //     status: true
+              //   }
+              // });
+              // this.spots = newarray
+              console.log(this.spots)
+
+
             })
 
       }

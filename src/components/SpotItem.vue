@@ -47,7 +47,7 @@ import {API_BASE_URL} from './config.js'
 
 export default {
     name:'spotitem',
-    props: ["Spot"],
+    props: ["Spot", "username"],
     components: {
       VClamp
     },
@@ -94,7 +94,7 @@ export default {
               
             }
             //axios update
-            //this.updatestate();
+            this.updatestate();
 
 
         },
@@ -119,12 +119,10 @@ export default {
     updatestate(){
               axios({
                   method: 'put',
-                  url: API_BASE_URL + '/update_fav/'+this.Spot.id,
+                  url: API_BASE_URL + '/update/'+this.Spot.id+'/'+this.username,
                   headers : { 
                       
                   },
-                    'state': this.state,
-                    'username': sessionStorage.getItem('username')
 
                   }).catch(function (error) {
                               // alert(error)

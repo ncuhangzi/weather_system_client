@@ -1,7 +1,7 @@
 <template>
 <div>
     <transition name="el-zoom-in-top">
-        <Spot :spots="spots"/>        
+        <Spot :spots="spots" :username="username"/>        
     </transition>
 
 </div>
@@ -22,10 +22,15 @@ export default {
             spots:[
 
             ],
+            username: '',
 
         }
     },
     mounted(){
+      if(this.username == ''){
+        this.username = sessionStorage.getItem('username')
+        console.log('username is'+this.username)
+      }
       this.getpop();
     },
     methods:{
@@ -33,7 +38,7 @@ export default {
         console.log('start getpop')
         axios({
               method: 'get',
-              url: API_BASE_URL + '/pop',
+              url: API_BASE_URL + '/pop/'+this.username,
               headers : { 
                 
               },

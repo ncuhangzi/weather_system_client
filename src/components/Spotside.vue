@@ -33,14 +33,17 @@ import {API_BASE_URL} from './config.js'
 
 export default {
     name:'spotside',
-    props: ["Spot"],
+    props: ["Spot", "username"],
     data(){
         return{
             state: this.Spot.status,
             costate: this.Spot.status,
+
         }
     },
     mounted(){
+      //console.log(this.username)
+
       if(this.state == false){this.costate = true}
     },
     watch:{
@@ -80,7 +83,7 @@ export default {
         updatestate(){
             axios({
                 method: 'put',
-                url: API_BASE_URL + '/update/'+this.Spot.id,
+                url: API_BASE_URL + '/update/'+this.Spot.id+'/'+this.username,
                 headers : { 
                     
                 },
