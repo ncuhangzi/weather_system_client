@@ -34,9 +34,8 @@
     </el-row>
 
     <el-form
-      
-      :rules="rules"
       :model="ruleForm"
+      :rules="rules"
       ref="ruleForm"
       class="demo-ruleForm"
     >
@@ -83,7 +82,7 @@
           >
           <el-form-item prop="gender">
             <el-radio-group v-model="ruleForm.gender">
-              <el-radio label="0">
+              <el-radio label="male">
                 <span
                   class="el-form-item__label"
                   style="
@@ -96,7 +95,7 @@
                 </span></el-radio
               >
 
-              <el-radio label="1">
+              <el-radio label="female">
                 <span
                   class="el-form-item__label"
                   style="
@@ -127,13 +126,15 @@
 </template>
 
 <script>
-import axios from "axios";
-import { API_BASE_URL } from "./config.js";
+import axios from 'axios'
+import {API_BASE_URL} from './config.js'
 
 export default {
   name: "member",
   data() {
     return {
+      member_icon_line1: "https://i.imgur.com/RoK6Nte.png",
+
       dynamicValidateForm: {
         domains: [{ value: "" }],
         email: "",
@@ -151,48 +152,12 @@ export default {
       },
     };
   },
+  mounted(){
+    this.dynamicValidateForm.email = sessionStorage.getItem('username')
+    this.getmember();
+  },
 
   methods: {
-    // getmember() {
-    //   axios({
-    //     method: "get",
-    //     url: API_BASE_URL + "api/member",
-    //     headers: {
-    //       username: this.email,
-    //       name: this.nickname,
-    //       gender: this.gender,
-    //     },
-    //     data: {},
-    //   })
-    //     .catch(function (error) {
-    //       // alert(error)
-    //       console.log(error);
-    //     })
-    //     .then((res) => {
-    //       this.member = res.data.member;
-    //     });
-    // },
-    
-    updatemember() {
-      axios({
-        method: "put",
-        url: API_BASE_URL + "api/member",
-        headers: {
-        },
-        data: {
-          'name': this.nickname,
-          'gender': this.gender,
-        },
-      })
-        .catch(function (error) {
-          // alert(error)
-          console.log(error);
-        })
-        .then((res) => {
-          this.member = res.data.member;
-        });
-    },
-
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -202,6 +167,51 @@ export default {
           return false;
         }
       });
+      this.updatemember();
+    },
+    getmember(){
+          axios({
+              method: 'get',
+              url: API_BASE_URL + '/member/'+this.dynamicValidateForm.email,
+              headers : { 
+
+              },
+            }).catch(function (error) {
+                          // alert(error)
+                          console.log(error);    
+            }).then((res)=>{
+              console.log(res)
+               this.dynamicValidateForm.email = res.data.email
+               this.ruleForm.nickname = res.data.name
+               this.ruleForm.gender = res.data.gender
+
+              
+                           
+            })     
+
+    },
+    updatemember(){
+        axios({
+              method: 'post',
+              url: API_BASE_URL + '/member/' + this.ruleForm.nickname+'/'+this.ruleForm.gender+'/'+this.dynamicValidateForm.email,
+              headers : { 
+
+              },
+
+            }).catch(function (error) {
+                          // alert(error)
+                          console.log(error);    
+            }).then((res)=>{
+              console.log(res)
+              //根據回傳判斷是否註冊成功
+              if(res.data == true){
+                
+                alert('修改成功!')
+              }
+
+              
+                           
+            })
     },
   },
 

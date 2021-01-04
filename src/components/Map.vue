@@ -266,6 +266,7 @@
       </div>
       <hr class="line_1" />
 
+<<<<<<< HEAD
       <div v-for="spot in spots" :key="spot.name">
         <!-- 
           -- Vue陣列 v-for：
@@ -275,6 +276,22 @@
           -- :(冒號)：v-bind的簡寫，完整是v-bind:key=""，屬性綁定的意思，
                    以該例來說是指「屬性key要帶入資料spot」，
          -->
+=======
+        <el-drawer
+        title="相關景點推薦" :visible.sync="drawer" :direction="'ltr'" :before-close="handleClose" :with-header="false" size='50%'>
+            <el-row><span class="city">{{location}}</span><span class="stext"> 的熱門景點：</span></el-row>
+            <div class="spotsection" >
+            <vuescroll>
+            <div  v-for="spot in spots" :key="spot.name">
+                
+                    <Spotside :Spot="spot" :username="username"/>      
+                       
+            </div>
+            </vuescroll>
+            </div>
+            
+        </el-drawer>
+>>>>>>> master
 
         <Spotside :Spot="spot" />
         <!-- 
@@ -287,6 +304,7 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import axios from "axios";
 import Spotside from "./Spotside.vue";
 
@@ -353,6 +371,31 @@ export default {
     //     // 設定是否讓使用者可以切換地圖樣式：一般、衛星圖等
     //     mapTypeControl: false
     //     });
+=======
+import axios from 'axios'
+import Spotside from './Spotside.vue'
+import vuescroll from 'vuescroll';
+import {API_BASE_URL} from './config.js'
+
+export default {
+    components: {
+        Spotside,
+        vuescroll
+    },
+    data(){
+        return{
+            map: null,
+            lat: 25.0325917,
+            lng: 121.5624999,
+            ops:{
+
+            },
+            spots:[],
+            location: '',
+            drawer: false,
+            username: '',
+        }
+>>>>>>> master
 
     // },
     // setMarker() {
@@ -372,6 +415,7 @@ export default {
       this.degrees = this.spots[0].degrees;
       this.change_weather_img(this.spots[0].weather_desc);
     },
+<<<<<<< HEAD
     getSpot() {
       axios({
         method: "get",
@@ -379,6 +423,67 @@ export default {
         headers: {
           accessToken: sessionStorage.getItem("accessToken"),
           location: this.location,
+=======
+    mounted(){
+      if(this.username == ''){
+        this.username = sessionStorage.getItem('username')
+        console.log('username is'+this.username)
+      }
+        //this.initMap();
+        //this.setMarker();
+    },
+    methods: {
+        // initMap(){
+        //     // 透過 Map 物件建構子建立新地圖 map 物件實例，並將地圖呈現在 id 為 map 的元素中
+        //     this.map = new google.maps.Map(document.getElementById("map"), {
+        //     // 設定地圖的中心點經緯度位置
+        //     center: { lat: this.lat, lng: this.lng },
+        //     // 設定地圖縮放比例 0-20
+        //     zoom: 15,
+        //     // 限制使用者能縮放地圖的最大比例
+        //     maxZoom: 20,
+        //     // 限制使用者能縮放地圖的最小比例
+        //     minZoom: 3,
+        //     // 設定是否呈現右下角街景小人
+        //     streetViewControl: false,
+        //     // 設定是否讓使用者可以切換地圖樣式：一般、衛星圖等
+        //     mapTypeControl: false
+        //     });
+            
+        // },
+        // setMarker() {
+        //     // 建立一個新地標
+        //     const marker = new google.maps.Marker({
+        //         // 設定地標的座標
+        //         position: { lat: this.lat, lng: this.lng },
+        //         // 設定地標要放在哪一個地圖
+        //         map: this.map
+        //     });
+        // },
+        selectloc(value){
+            //console.log('current env:'+process.env.WEATHER_API)
+            this.drawer = true;
+            this.location = value;
+            this.getSpot();
+        },
+        getSpot(){
+          axios({
+              method: 'get',
+              url: API_BASE_URL + '/select/'+this.location+'/'+this.username,
+              headers : {  
+ 
+              },
+
+            }).catch(function (error) {
+                          // alert(error)
+                          console.log('error:'+error);    
+            }).then((res)=>{
+              console.log(res.data)
+              this.spots = []
+              this.spots = res.data.spot_info
+                           
+            })
+>>>>>>> master
         },
       })
         .catch(function (error) {
@@ -413,6 +518,7 @@ export default {
 };
 </script>
 
+<<<<<<< HEAD
 <style scoped>
 .google-map {
   width: 100%;
@@ -572,5 +678,33 @@ body {
   h1{
     font-size: 17px;
   }
+=======
+<style>
+
+.imgarea{
+    background-color: white;
+>>>>>>> master
 }
+.spotsection{
+    height: 100%;
+    overflow:auto;
+}
+.el-drawer__body {
+    height: 100%;
+	box-sizing: border-box;
+	
+    
+}
+.city{
+    font-size: 3em;
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: left;
+    color: #999999;
+}
+.stext{
+    font-weight:bold;
+    font-size: 1.5em;
+}
+
+
 </style>

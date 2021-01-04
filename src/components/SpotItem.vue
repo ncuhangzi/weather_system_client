@@ -3,7 +3,7 @@
     <transition name="el-zoom-in-top">
        <el-card class="box-card">
          <el-row>
-         <a href="javascript:;" @click="toContent(Spot.name, Spot.image, Spot.city, Spot.info, Spot.state)">
+         <a href="javascript:;" @click="toContent(Spot.id, Spot.name, Spot.image, Spot.city, Spot.info, Spot.status, Spot.degree ,Spot.weather)">
               <el-col :span="6">
                 <div class="imagediv">
                 <el-image
@@ -24,7 +24,7 @@
         </a>
           <el-col :span="2">
                 <!--<el-button type="warning" icon="el-icon-star-off" circle @click="addtofav"></el-button>-->
-                <svg width="3em" height="3em" viewBox="0 0 16 16" :class="'bi bi-heart'+(state==true?'-fill':'')" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color:#cc99ff" @click="addtofav">
+                <svg width="3em" height="3em" viewBox="0 0 16 16" :class="'bi bi-heart'+(state==true?'-fill':'')" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color:#99a9bf" @click="addtofav">
                   
                   <path v-if="state" fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                   <path v-if="costate" fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
@@ -43,18 +43,19 @@
 <script>
 import axios from 'axios'
 import VClamp from 'vue-clamp'
+import {API_BASE_URL} from './config.js'
 
 export default {
     name:'spotitem',
-    props: ["Spot"],
+    props: ["Spot", "username"],
     components: {
       VClamp
     },
     data(){
         return{
             url: "https://www.meway.com.tw/jp/wp-content/uploads/2016/05/%E5%B7%A5%E4%BA%8B%E4%B8%AD.png",
-            state: this.Spot.state,
-            costate: this.Spot.state,
+            state: this.Spot.status,
+            costate: this.Spot.status,
             info: this.Spot.info,
             path: '',
         }
@@ -93,45 +94,46 @@ export default {
               
             }
             //axios update
-            //this.updatestate();
+            this.updatestate();
 
 
         },
             //send event parameter to the reward page
-        toContent  (spotname, image, city, info, state){
+        toContent  (id, spotname, image, city, info, state, degree, weather){
                   
                   this.$router.push({
                   path : '/spot' , 
                   query : { 
+                    id: id,
                     spotname: spotname,
                     image: image,
                     city: city,
                     info: info,
-                    state: state
+                    state: state,
+                    degree: degree, 
+                    weather: weather,
                   }
                 })   
       
     },
     updatestate(){
-        axios({
-              method: 'patch',
-              url: process.env.WEATHER_API + 'api/like',
-              headers : { 
-                'accessToken': sessionStorage.getItem('accessToken'),
-                'spotid': this.Spot.name 
-                
-              },
+              axios({
+                  method: 'put',
+                  url: API_BASE_URL + '/update/'+this.Spot.id+'/'+this.username,
+                  headers : { 
+                      
+                  },
 
-            }).catch(function (error) {
-                          // alert(error)
-                          console.log(error);    
-            }).then((res)=>{
+                  }).catch(function (error) {
+                              // alert(error)
+                              console.log(error);    
+                  }).then((res)=>{
 
-              this.spots = res.data.spots
-                           
-            })
+                  console.log(res)
+                              
+                  })
 
-    },
+     },
 
     },
 }
