@@ -46,14 +46,14 @@ export default {
                           // alert(error)
                           console.log(error);    
             }).then((res)=>{
-              console.log(typeof(res.data))   
-                       
-              let newarray = Array.from(res.data)
-              newarray.forEach((e) => {
-                e.status = true
+              console.log(res.data)   
+               this.spots = res.data        
+              // let newarray = Array.from(res.data)
+              // newarray.forEach((e) => {
+              //   e.status = true
                 
-              });
-              this.spots = newarray
+              // });
+              // this.spots = newarray
               
               // let newarray = Array.from(res.data).map((element) =>{
               //   return{

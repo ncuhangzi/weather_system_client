@@ -171,7 +171,7 @@ export default {
               //根據回傳判斷是否註冊成功
               if(res.data == 'Success'){
                 sessionStorage.setItem('token', 'Imlogin')
-                sessionStorage.setItem('username', this.username)
+                sessionStorage.setItem('username', this.ruleForm.email)
                 this.$router.push('/');
               }
 

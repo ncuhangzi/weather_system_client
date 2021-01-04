@@ -84,7 +84,7 @@
           >
           <el-form-item prop="gender">
             <el-radio-group v-model="ruleForm.gender">
-              <el-radio label="0">
+              <el-radio label="male">
                 <span
                   class="el-form-item__label"
                   style="
@@ -97,7 +97,7 @@
                 </span></el-radio
               >
 
-              <el-radio label="1">
+              <el-radio label="female">
                 <span
                   class="el-form-item__label"
                   style="
