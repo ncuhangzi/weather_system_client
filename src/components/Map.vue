@@ -1,50 +1,282 @@
 <template>
-    <!--<div class="google-map" id="map"></div>-->
-    <div>
-        <h2>請選擇一個城市</h2>
-        <h2>你選擇的是：{{location}}</h2>
-        <div class="imgarea">
-            <!-- <img src="../assets/asiacity_map.png" alt="Workplace" usemap="#workmap" width="400" height="379"> -->
-                <el-image
-                style="width: 860px; height: 857px"
-                :src="'https://i.imgur.com/TgcPtEb.png'"
-                :fit="fit" alt="Workplace" usemap="#workmap"></el-image>
+  <!--<div class="google-map" id="map"></div>-->
+  <div>
+    <h2>請選擇一個城市</h2>
+    <h2 class="location">你選擇的是：{{ location }}</h2>
+    <div class="imgarea">
+      <!-- <img src="../assets/asiacity_map.png" alt="Workplace" usemap="#workmap" width="400" height="379"> -->
+      <el-image
+        style="width: 860px; height: 857px"
+        :src="'https://i.imgur.com/TgcPtEb.png'"
+        :fit="fit"
+        alt="Workplace"
+        usemap="#workmap"
+      ></el-image>
 
-            <map name="workmap">
-                <area shape="rect" coords="795,266,859,297" alt="Honolulu" href="javascript:;" @click="selectloc('Honolulu')">
-                <area shape="circle" coords="322,181,7" alt="Xi An" href="javascript:;" @click="selectloc('Xi An')">
-                <area shape="circle" coords="271,164,7" alt="Lanzhou" href="javascript:;" @click="selectloc('Lanzhou')">
-                <area shape="circle" coords="421,146,7" alt="Shenyang" href="javascript:;" @click="selectloc('Shenyang')">
-                <area shape="circle" coords="378,164,7" alt="Beijing" href="javascript:;" @click="selectloc('Beijing')">
-                <area shape="circle" coords="406,196,7" alt="Qingdao" href="javascript:;" @click="selectloc('Qingdao')">
-                <area shape="circle" coords="311,227,7" alt="Chongqing" href="javascript:;" @click="selectloc('Chongqing')">
-                <area shape="circle" coords="392,220,7" alt="Nanjing" href="javascript:;" @click="selectloc('Nanjing')">
-                <area shape="circle" coords="368,236,7" alt="Wuhan" href="javascript:;" @click="selectloc('Wuhan')">
-                <area shape="circle" coords="413,231,7" alt="Shanghai" href="javascript:;" @click="selectloc('Shanghai')">
-                <area shape="circle" coords="368,292,7" alt="Hong Kong" href="javascript:;" @click="selectloc('Hong Kong')">
-                <area shape="circle" coords="312,305,7" alt="Hanoi" href="javascript:;" @click="selectloc('Hanoi')">
-                <area shape="circle" coords="281,352,7" alt="Bangkok" href="javascript:;" @click="selectloc('Bangkok')">
-                <area shape="circle" coords="321,371,7" alt="Ho Chi Minh" href="javascript:;" @click="selectloc('Ho Chi Minh')">
-                <area shape="circle" coords="415,341,7" alt="Maynila" href="javascript:;" @click="selectloc('Maynila')">
-                <area shape="circle" coords="290,416,7" alt="Kuala Lumpur" href="javascript:;" @click="selectloc('Kuala Lumpur')">
-                <area shape="circle" coords="306,433,7" alt="Singapore" href="javascript:;" @click="selectloc('Singapore')">
-                <area shape="circle" coords="322,475,7" alt="Jakarta" href="javascript:;" @click="selectloc('Jakarta')">
-                <area shape="circle" coords="387,645,7" alt="Perth" href="javascript:;" @click="selectloc('Perth')">
-                <area shape="circle" coords="526,666,7" alt="Adelaide" href="javascript:;" @click="selectloc('Adelaide')">
-                <area shape="circle" coords="567,689,7" alt="Melbourne" href="javascript:;" @click="selectloc('Melbourne')">
-                <area shape="circle" coords="605,661,7" alt="Sydney" href="javascript:;" @click="selectloc('Sydney')">
-                <area shape="circle" coords="616,618,7" alt="Brisbane" href="javascript:;" @click="selectloc('Brisbane')">
-                <area shape="rect" coords="538,323,585,349" alt="Guam" href="javascript:;" @click="selectloc('Guam')">
-                <area shape="circle" coords="749,679,7" alt="Auckland" href="javascript:;" @click="selectloc('Auckland')">
-                <area shape="circle" coords="748,704,7" alt="Wellington" href="javascript:;" @click="selectloc('Wellington')">
-                <area shape="circle" coords="533,198,7" alt="Tokyo" href="javascript:;" @click="selectloc('Tokyo')">
-                <area shape="circle" coords="500,208,7" alt="Osaka" href="javascript:;" @click="selectloc('Osaka')">
-                <area shape="circle" coords="454,187,7" alt="Seoul" href="javascript:;" @click="selectloc('Seoul')">
-                <area shape="circle" coords="509,88,7" alt="Vladivostok" href="javascript:;" @click="selectloc('Vladivostok')">
-                
-            </map>
+      <map name="workmap">
+        <area
+          shape="rect"
+          coords="795,266,859,297"
+          alt="Honolulu"
+          href="javascript:;"
+          @click="selectloc('Honolulu')"
+        />
+        <area
+          shape="circle"
+          coords="322,181,7"
+          alt="Xi An"
+          href="javascript:;"
+          @click="selectloc('Xi An')"
+        />
+        <area
+          shape="circle"
+          coords="271,164,7"
+          alt="Lanzhou"
+          href="javascript:;"
+          @click="selectloc('Lanzhou')"
+        />
+        <area
+          shape="circle"
+          coords="421,146,7"
+          alt="Shenyang"
+          href="javascript:;"
+          @click="selectloc('Shenyang')"
+        />
+        <area
+          shape="circle"
+          coords="378,164,7"
+          alt="Beijing"
+          href="javascript:;"
+          @click="selectloc('Beijing')"
+        />
+        <area
+          shape="circle"
+          coords="406,196,7"
+          alt="Qingdao"
+          href="javascript:;"
+          @click="selectloc('Qingdao')"
+        />
+        <area
+          shape="circle"
+          coords="311,227,7"
+          alt="Chongqing"
+          href="javascript:;"
+          @click="selectloc('Chongqing')"
+        />
+        <area
+          shape="circle"
+          coords="392,220,7"
+          alt="Nanjing"
+          href="javascript:;"
+          @click="selectloc('Nanjing')"
+        />
+        <area
+          shape="circle"
+          coords="368,236,7"
+          alt="Wuhan"
+          href="javascript:;"
+          @click="selectloc('Wuhan')"
+        />
+        <area
+          shape="circle"
+          coords="413,231,7"
+          alt="Shanghai"
+          href="javascript:;"
+          @click="selectloc('Shanghai')"
+        />
+        <area
+          shape="circle"
+          coords="368,292,7"
+          alt="Hong Kong"
+          href="javascript:;"
+          @click="selectloc('Hong Kong')"
+        />
+        <area
+          shape="circle"
+          coords="312,305,7"
+          alt="Hanoi"
+          href="javascript:;"
+          @click="selectloc('Hanoi')"
+        />
+        <area
+          shape="circle"
+          coords="281,352,7"
+          alt="Bangkok"
+          href="javascript:;"
+          @click="selectloc('Bangkok')"
+        />
+        <area
+          shape="circle"
+          coords="321,371,7"
+          alt="Ho Chi Minh"
+          href="javascript:;"
+          @click="selectloc('Ho Chi Minh')"
+        />
+        <area
+          shape="circle"
+          coords="415,341,7"
+          alt="Maynila"
+          href="javascript:;"
+          @click="selectloc('Maynila')"
+        />
+        <area
+          shape="circle"
+          coords="290,416,7"
+          alt="Kuala Lumpur"
+          href="javascript:;"
+          @click="selectloc('Kuala Lumpur')"
+        />
+        <area
+          shape="circle"
+          coords="306,433,7"
+          alt="Singapore"
+          href="javascript:;"
+          @click="selectloc('Singapore')"
+        />
+        <area
+          shape="circle"
+          coords="322,475,7"
+          alt="Jakarta"
+          href="javascript:;"
+          @click="selectloc('Jakarta')"
+        />
+        <area
+          shape="circle"
+          coords="387,645,7"
+          alt="Perth"
+          href="javascript:;"
+          @click="selectloc('Perth')"
+        />
+        <area
+          shape="circle"
+          coords="526,666,7"
+          alt="Adelaide"
+          href="javascript:;"
+          @click="selectloc('Adelaide')"
+        />
+        <area
+          shape="circle"
+          coords="567,689,7"
+          alt="Melbourne"
+          href="javascript:;"
+          @click="selectloc('Melbourne')"
+        />
+        <area
+          shape="circle"
+          coords="605,661,7"
+          alt="Sydney"
+          href="javascript:;"
+          @click="selectloc('Sydney')"
+        />
+        <area
+          shape="circle"
+          coords="616,618,7"
+          alt="Brisbane"
+          href="javascript:;"
+          @click="selectloc('Brisbane')"
+        />
+        <area
+          shape="rect"
+          coords="538,323,585,349"
+          alt="Guam"
+          href="javascript:;"
+          @click="selectloc('Guam')"
+        />
+        <area
+          shape="circle"
+          coords="749,679,7"
+          alt="Auckland"
+          href="javascript:;"
+          @click="selectloc('Auckland')"
+        />
+        <area
+          shape="circle"
+          coords="748,704,7"
+          alt="Wellington"
+          href="javascript:;"
+          @click="selectloc('Wellington')"
+        />
+        <area
+          shape="circle"
+          coords="533,198,7"
+          alt="Tokyo"
+          href="javascript:;"
+          @click="selectloc('Tokyo')"
+        />
+        <area
+          shape="circle"
+          coords="500,208,7"
+          alt="Osaka"
+          href="javascript:;"
+          @click="selectloc('Osaka')"
+        />
+        <area
+          shape="circle"
+          coords="454,187,7"
+          alt="Seoul"
+          href="javascript:;"
+          @click="selectloc('Seoul')"
+        />
+        <area
+          shape="circle"
+          coords="509,88,7"
+          alt="Vladivostok"
+          href="javascript:;"
+          @click="selectloc('Vladivostok')"
+        />
+      </map>
+    </div>
+
+    <el-drawer
+      title=""
+      :visible.sync="drawer"
+      :direction="'ltr'"
+      :before-close="handleClose"
+      size="50%"
+      :with-header="true"
+    >
+      <h1>{{ location }}的相關景點：</h1>
+      <!-- <main>
+        <div class="weather">{{ location }}</div>
+        <div class="weather">{{ degrees }} </div>
+        <div class="weather">
+          <el-image
+            style="width: 30px; height: 30px"
+            :src="weather_icon"
+            :fit="fit"
+            id="weather_img"
+          ></el-image>
         </div>
+      </main>-->
+      <div class="box">
+        <div class="weather_row">
+          <el-row>
+            <el-col span="7">{{ location }}</el-col>
+            <el-col span="2" offset="2">{{ degrees }} </el-col>
+            <el-col span="2" offset="2"
+              ><el-image
+                style="width: 30px; height: 30px"
+                :src="weather_icon"
+                :fit="fit"
+                id="weather_img"
+              ></el-image
+            ></el-col>
+          </el-row>
+        </div>
+      </div>
+      <hr class="line_1" />
 
+<<<<<<< HEAD
+      <div v-for="spot in spots" :key="spot.name">
+        <!-- 
+          -- Vue陣列 v-for：
+          -- spots：在data()裡為陣列取的名字，
+          -- sopt：是指spots陣列裡的「單筆」資料，取名為spot
+          -- key：陣列中有多筆資料，為各筆資料下key來分辨
+          -- :(冒號)：v-bind的簡寫，完整是v-bind:key=""，屬性綁定的意思，
+                   以該例來說是指「屬性key要帶入資料spot」，
+         -->
+=======
         <el-drawer
         title="相關景點推薦" :visible.sync="drawer" :direction="'ltr'" :before-close="handleClose" :with-header="false" size='50%'>
             <el-row><span class="city">{{location}}</span><span class="stext"> 的熱門景點：</span></el-row>
@@ -59,11 +291,87 @@
             </div>
             
         </el-drawer>
+>>>>>>> master
 
-    </div>
+        <Spotside :Spot="spot" />
+        <!-- 
+          子元件Spotside中：設定props: ["Spot"]來接收父層傳來的資料
+          父層Map中：先列出component，再把資料(spot)透過Spot 傳遞給子元件 
+        -->
+      </div>
+    </el-drawer>
+  </div>
 </template>
 
 <script>
+<<<<<<< HEAD
+import axios from "axios";
+import Spotside from "./Spotside.vue";
+
+export default {
+  components: {
+    Spotside,
+  },
+  data() {
+    return {
+      map: null,
+      lat: 25.0325917,
+      lng: 121.5624999,
+      spots: [
+        {
+          name: "Tokyo Tower",
+          image:
+            "https://img.travel98.com/xl/P_14871_c4a56264d38a3641751286028793f16a_o.jpg",
+          city: "Tokyo",
+          address: "東京都港區芝公園4-2-8",
+          info:
+            "東京鐵塔是位於日本東京芝公園的電波塔。其以巴黎艾菲爾鐵塔為範本而建造，高333公尺，比前者高13公尺，完工以來即成為東京著名地標與觀光景點。正式名稱為日本電波塔，這同時也是其營運機構的舊稱。目前為日本第二高的結構物，僅次於東京晴空塔。1958年，外表一根根交錯複雜像蜘蛛網結構的建築物，開始聳立於東京，成為最耀眼的日本地標「東京鐵塔」，它是廣播電視電波塔，全長高度有333公尺，分成塔下的大樓「Foottown」、「大展望台」即「Main Deck」位於150公尺、「特別展望台」位於250公尺，在經過一段時間的裝修後，將其新命名為「Top Deck」。",
+          count: 0,
+          state: false,
+          weather_desc: "SNOW",
+          degrees: "23.50",
+        },
+        {
+          name: "Tokyo Power",
+          image:
+            "https://img.travel98.com/xl/P_14871_c4a56264d38a3641751286028793f16a_o.jpg",
+          city: "Tokyo",
+          address: "東京都港區芝公園4-2-8",
+          info:
+            "東京鐵塔是位於日本東京芝公園的電波塔。其以巴黎艾菲爾鐵塔為範本而建造，高333公尺，比前者高13公尺，完工以來即成為東京著名地標與觀光景點。正式名稱為日本電波塔，這同時也是其營運機構的舊稱。目前為日本第二高的結構物，僅次於東京晴空塔。1958年，外表一根根交錯複雜像蜘蛛網結構的建築物，開始聳立於東京，成為最耀眼的日本地標「東京鐵塔」，它是廣播電視電波塔，全長高度有333公尺，分成塔下的大樓「Foottown」、「大展望台」即「Main Deck」位於150公尺、「特別展望台」位於250公尺，在經過一段時間的裝修後，將其新命名為「Top Deck」。",
+          count: 0,
+          state: false,
+          weather_desc: "SNOW",
+          degrees: "23.50",
+        },
+      ],
+      location: "",
+      drawer: false,
+      weather_icon: "https://i.imgur.com/uhahPmK.png",
+    };
+  },
+  mounted() {
+    //this.initMap();
+    //this.setMarker();
+  },
+  methods: {
+    // initMap(){
+    //     // 透過 Map 物件建構子建立新地圖 map 物件實例，並將地圖呈現在 id 為 map 的元素中
+    //     this.map = new google.maps.Map(document.getElementById("map"), {
+    //     // 設定地圖的中心點經緯度位置
+    //     center: { lat: this.lat, lng: this.lng },
+    //     // 設定地圖縮放比例 0-20
+    //     zoom: 15,
+    //     // 限制使用者能縮放地圖的最大比例
+    //     maxZoom: 20,
+    //     // 限制使用者能縮放地圖的最小比例
+    //     minZoom: 3,
+    //     // 設定是否呈現右下角街景小人
+    //     streetViewControl: false,
+    //     // 設定是否讓使用者可以切換地圖樣式：一般、衛星圖等
+    //     mapTypeControl: false
+    //     });
+=======
 import axios from 'axios'
 import Spotside from './Spotside.vue'
 import vuescroll from 'vuescroll';
@@ -87,8 +395,35 @@ export default {
             drawer: false,
             username: '',
         }
+>>>>>>> master
 
+    // },
+    // setMarker() {
+    //     // 建立一個新地標
+    //     const marker = new google.maps.Marker({
+    //         // 設定地標的座標
+    //         position: { lat: this.lat, lng: this.lng },
+    //         // 設定地標要放在哪一個地圖
+    //         map: this.map
+    //     });
+    // },
+    selectloc(value) {
+      //console.log('current env:'+process.env.WEATHER_API)
+      this.drawer = true;
+      this.location = value;
+      this.getSpot();
+      this.degrees = this.spots[0].degrees;
+      this.change_weather_img(this.spots[0].weather_desc);
     },
+<<<<<<< HEAD
+    getSpot() {
+      axios({
+        method: "get",
+        url: process.env.WEATHER_API + "api/spot",
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken"),
+          location: this.location,
+=======
     mounted(){
       if(this.username == ''){
         this.username = sessionStorage.getItem('username')
@@ -148,18 +483,207 @@ export default {
               this.spots = res.data.spot_info
                            
             })
+>>>>>>> master
         },
-
-        //send:city
-        //recieve:[get] spot,userfavlist
+      })
+        .catch(function (error) {
+          // alert(error)
+          console.log(error);
+        })
+        .then((res) => {
+          this.spots = res.data;
+        });
     },
-}
+
+    change_weather_img(weather_desc) {
+      if (weather_desc == "CLOUDY") {
+        this.weather_icon = "https://i.imgur.com/uhahPmK.png";
+      } else if (weather_desc == "RAINY") {
+        this.weather_icon = "https://i.imgur.com/BPoKiYc.png";
+      } else if (weather_desc == "SNOW") {
+        this.weather_icon = "https://i.imgur.com/OFgTy0C.png";
+      } else if (weather_desc == "SHOWERS") {
+        this.weather_icon = "https://i.imgur.com/BtlI7Vi.png";
+      } else if (weather_desc == "CLEAR") {
+        this.weather_icon = "https://i.imgur.com/jsCwuWF.png";
+      } else if (weather_desc == "SUNNY") {
+        this.weather_icon = "https://i.imgur.com/sH1g2c7.png";
+      } else if (weather_desc == "PARTLY_CLOUDY") {
+        this.weather_icon = "https://i.imgur.com/q7l3jHA.png";
+      }
+    },
+    //send:city
+    //recieve:[get] spot,userfavlist
+  },
+};
 </script>
 
+<<<<<<< HEAD
+<style scoped>
+.google-map {
+  width: 100%;
+  height: 400px;
+}
+.imgarea {
+  background-color: white;
+}
+
+h1 {
+  background: #90b0ca;
+  font-size: 22px;
+  color: #fff;
+  height: 50px;
+  text-align: center;
+  padding: 10px;
+  margin-top: -25px;
+  margin-bottom: 15px;
+}
+body {
+  font-family: "微軟正黑體";
+}
+
+.box {
+  line-height: 30px;
+  margin-left: 3%;
+  margin-right: 40%;
+}
+.weather_row {
+  font-size: 20px;
+  margin: 1%;
+  color: #90b0ca;
+  font-weight: bold;
+  height: 30px;
+}
+.line_1 {
+  border: none;
+  border-top: 1px dashed;
+  /* margin-bottom: 10px; */
+  color: #90b0ca;
+  height: 2px;
+  width: 100%;
+}
+@media screen and (max-width: 1150px) {
+  .box {
+    line-height: 30px;
+    margin-left: 3%;
+    margin-right: 25%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .box {
+    line-height: 30px;
+    margin-left: 3%;
+    margin-right: 20%;
+  }
+}
+@media screen and (max-width: 850px) {
+  .box {
+    line-height: 30px;
+    margin-left: 3%;
+    margin-right: 15%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .box {
+    line-height: 30px;
+    margin-left: 3%;
+    margin-right: 12%;
+  }
+}
+@media screen and (max-width: 730px) {
+  .box {
+    line-height: 30px;
+    margin-left: 3%;
+    margin-right: 9%;
+  }
+  .weather_row {
+    font-size: 19px;
+  }
+}
+@media screen and (max-width: 710px) {
+  .box {
+    line-height: 30px;
+    margin-left: 2%;
+    margin-right: 6%;
+  }
+  .weather_row {
+    font-size: 19px;
+  }
+}
+@media screen and (max-width: 650px) {
+  .box {
+    line-height: 30px;
+    margin-left: 1%;
+    margin-right: 2%;
+  }
+  .weather_row {
+    font-size: 18px;
+    margin: 10px;
+  }
+}
+@media screen and (max-width: 635px) {
+  .box {
+    line-height: 30px;
+    margin-left: 8px;
+    margin-right: 5%;
+  }
+
+  .weather_row {
+    font-size: 17px;
+    margin: 2px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .box {
+    line-height: 30px;
+    margin-left: 8px;
+    margin-right: 8%;
+  }
+
+  .weather_row {
+    font-size: 15px;
+    margin: 2px;
+  }
+  h1{
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 550px) {
+  .box {
+    line-height: 30px;
+    margin-left: 8px;
+    margin-right: 10%;
+  }
+
+  .weather_row {
+    font-size: 13px;
+    margin: 2px;
+  }
+  h1{
+    font-size: 19px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .box {
+    line-height: 30px;
+    margin-left: 8px;
+    margin-right: 10%;
+  }
+
+  .weather_row {
+    font-size: 11px;
+    margin: 2px;
+  }
+  h1{
+    font-size: 17px;
+  }
+=======
 <style>
 
 .imgarea{
     background-color: white;
+>>>>>>> master
 }
 .spotsection{
     height: 100%;

@@ -1,10 +1,8 @@
 <template>
   <div class="content">
-    <el-image
-      style="width: 700px; height: 7px; margin-top: 5%"
-      :src="member_icon_line1"
-      :fit="fit"
-    ></el-image>
+    <div>
+      <img class="line1" src="https://i.imgur.com/RoK6Nte.png" />
+    </div>
 
     <el-row class="field_content">
       <el-col :span="1" style="color: #7078b4">
@@ -19,9 +17,9 @@
                 width: 20%;
                 font-size: 20px;
                 font-weight: bold;
-                color: #7078b4;
+                color: #5A6890;
               "
-              >信箱</label
+              >帳號</label
             >
             <el-input
               size="small"
@@ -52,7 +50,7 @@
               width: 20%;
               font-size: 20px;
               font-weight: bold;
-              color: #7078b4;
+              color: #5A6890;
             "
             >暱稱</label
           >
@@ -78,7 +76,7 @@
               width: 20%;
               font-size: 20px;
               font-weight: bold;
-              color: #7078b4;
+              color: #5A6890;
             "
             >性別</label
           >
@@ -91,7 +89,7 @@
                     width: 50%;
                     font-size: 20px;
                     font-weight: bold;
-                    color: #7078b4;
+                    color: #5A6890;
                   "
                   >男
                 </span></el-radio
@@ -104,7 +102,7 @@
                     width: 50%;
                     font-size: 20px;
                     font-weight: bold;
-                    color: #7078b4;
+                    color: #5A6890;
                   "
                   >女</span
                 ></el-radio
@@ -132,6 +130,7 @@ import axios from 'axios'
 import {API_BASE_URL} from './config.js'
 
 export default {
+  name: "member",
   data() {
     return {
       member_icon_line1: "https://i.imgur.com/RoK6Nte.png",
@@ -140,15 +139,14 @@ export default {
         domains: [{ value: "" }],
         email: "",
       },
-
       ruleForm: {
-        nickname: "",
-        gender: "",
+        nickname: "pineapplepen",
+        gender: "0",
       },
       rules: {
         nickname: [
           { required: true, message: "請輸入暱稱", trigger: "blur" },
-          { min: 3, max: 12, message: "長度 3∼12 個字", trigger: "blur" },
+          { min: 3, max: 12, message: "長度 3～12 個字", trigger: "blur" },
         ],
         gender: [{ required: true, message: "請選擇性別", trigger: "blur" }],
       },
@@ -218,7 +216,7 @@ export default {
   },
 
   //send [post]username, email, sex, password, nickname
-  //recieve
+  //receive
 };
 </script>
 
@@ -240,7 +238,7 @@ export default {
   display: inline-block;
   font-size: 25px;
   line-height: 40px;
-  color: #7078b4;
+  color: #5A6890;
   width: 40px;
   height: 40px;
   text-align: center;
@@ -251,5 +249,103 @@ export default {
   margin-top: 3%;
   margin-left: 40%;
   margin-right: 40%;
+}
+
+.line1 {
+  display: block;
+  margin: auto;
+  width: 50%;
+  height: 8px;
+  margin-top: 3%;
+}
+
+@media screen and (max-width: 1200px) {
+  .field_content {
+    margin-top: 4%;
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+  .line1 {
+    width: 60%;
+    height: 7px;
+    margin-top: 5%;
+  }
+}
+@media screen and (max-width: 1100px) {
+  .field_content {
+    margin-top: 4%;
+    margin-left: 23%;
+    margin-right: 23%;
+  }
+  .line1 {
+    width: 65%;
+    height: 7px;
+  }
+}
+@media screen and (max-width: 750px) {
+  .field_content {
+    margin-top: 7%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+  .line1 {
+    width: 75%;
+    margin-top: 8%;
+  }
+}
+@media screen and (max-width: 650px) {
+  .field_content {
+    margin-top: 7%;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+  .line1 {
+    width: 80%;
+    margin-top: 15%;
+  }
+}
+@media screen and (max-width: 550px) {
+  .field_content {
+    margin-top: 9%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  .line1 {
+    width: 90%;
+    margin-top: 17%;
+  }
+}
+@media screen and (max-width: 450px) {
+  .field_content {
+    margin-top: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .line1 {
+    width: 100%;
+    margin-top: 20%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .field_content {
+    margin-top: 12%;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+  .line1 {
+    width: 100%;
+    margin-top: 25%;
+  }
+}
+@media screen and (max-width: 350px) {
+  .field_content {
+    margin-top: 15%;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+  .line1 {
+    width: 100%;
+    margin-top: 43%;
+  }
 }
 </style>

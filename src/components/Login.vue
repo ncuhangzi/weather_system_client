@@ -66,7 +66,6 @@
 <script>
 import axios from "axios";
 import { API_BASE_URL } from "./config.js";
-
 export default {
   name: "login",
   data() {
@@ -114,7 +113,6 @@ export default {
   },
   methods: {
     checklogin() {
-
     },
     //login function
     submit(){
@@ -122,19 +120,16 @@ export default {
               method: 'post',
               url: API_BASE_URL + '/login',
               headers : { 
-
               },
               data: {
                 'email' : this.ruleForm.email,
                 'password' : this.ruleForm.password,
               },
-
             }).catch(function (error) {
                           // alert(error)
                           console.log(error);    
             }).then((res)=>{
                 console.log(res)
-
               this.token = res.data
                 //write login authencation logic here!
                 if( this.token == 'Imlogin' ){
@@ -147,14 +142,12 @@ export default {
                 }           
             })
     },
-
     //register function
     register(){
           axios({
               method: 'post',
               url: API_BASE_URL + '/register',
               headers : { 
-
               },
               data: {
                 'email' : this.ruleForm.email,
@@ -162,7 +155,6 @@ export default {
                 'name' : this.nickname,
                 'gender' : this.ruleForm.gender,
               },
-
             }).catch(function (error) {
                           // alert(error)
                           console.log(error);    
@@ -204,7 +196,6 @@ export default {
       });
     },
   },
-
   //send:[post] username, password
   //recieve: token, login result
 };

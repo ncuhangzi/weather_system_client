@@ -68,7 +68,6 @@ export default {
             visible: true,
             activeIndex: '1',
         }
-
     },
     mounted(){
         const Islogin =  sessionStorage.getItem('token') == 'Imlogin';
@@ -104,7 +103,6 @@ export default {
             })
         }
     },
-
 }
 </script>
 

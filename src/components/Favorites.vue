@@ -1,5 +1,19 @@
-<template>  
+<template>
   <div>
+
+    <main>
+      <div class="order">
+        <el-button type="text" size="small"
+          ><span class="order_bt">熱門</span>
+        </el-button>
+      </div>
+
+      <div class="order">
+        <el-button type="text" size="small" round
+          ><span class="order_bt">最新</span>
+        </el-button>
+      </div>
+
     <transition name="el-zoom-in-top">
         <Spot :spots="spots" :username="username"/>        
     </transition>
@@ -77,5 +91,25 @@ export default {
 </script>
 
 <style>
+main {
+  /*容器*/
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+main > .order {
+  flex: none;
+  width: 80px;
+  margin: 10px;
+  text-align: center;
+  background-color: #4b5267;
+  border-radius: 5px;
+}
+.order_bt {
+  font-family: "微軟正黑體";
+  font-weight: bold;
+  font-size: 14px;
+  color: #fff;
+}
 
 </style>
