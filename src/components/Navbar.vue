@@ -11,7 +11,7 @@
       
 
       <el-col :span="16" >
-          <span class="grid-content"> <h1></h1></span>
+          <span class="grid-content"> <h3></h3></span>
       </el-col>
       <el-col :span="4" > 
  

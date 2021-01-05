@@ -151,7 +151,7 @@ export default {
 
   }
   .spotname{
-    font-size: 2em;
+    font-size: 1em;
     font-weight: bold;
     text-align: right;
     color: #333333;
@@ -159,14 +159,14 @@ export default {
     vertical-align: bottom;
   }
   .city{
-    font-size: 2.5em;
+    font-size: 2em;
     font-family: "Lucida Console", "Courier New", monospace;
     text-align: left;
     color: #999999;
     
   }
   .info{
-    font-size: 1.5em;
+    font-size: 1em;
     color: #333333;
     text-align: left;
     text-indent: 50px;

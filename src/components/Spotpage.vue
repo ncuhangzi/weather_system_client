@@ -17,7 +17,7 @@
         </div>
         <el-row>
         <el-col :span="18">
-          <h1></h1>
+          <h3></h3>
         </el-col>
         <el-col :span="6">
         <div class="heart">         
@@ -63,6 +63,7 @@ export default {
             info: '',
             state: false,
             costate: false,
+            username:'',
         }
     },
     beforeMount(){
@@ -74,6 +75,7 @@ export default {
         this.info = this.content.info
         this.state = this.content.status
         this.id = this.content.id
+        this.username = sessionStorage.getItem('username')
     },
     mounted(){
       if(this.state == 'true'){this.state = true; this.costate = false}else if(this.state == 'false'){this.state = false; this.costate = true}

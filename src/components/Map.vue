@@ -46,17 +46,35 @@
         </div>
 
         <el-drawer
-        title="相關景點推薦" :visible.sync="drawer" :direction="'ltr'" :before-close="handleClose" :with-header="false" size='50%'>
-            <el-row><span class="city">{{location}}</span><span class="stext"> 的熱門景點：</span></el-row>
-            <div class="spotsection" >
+        title="" :visible.sync="drawer" :direction="'ltr'" :before-close="handleClose" :with-header="true" size='50%'>
+        <h1>{{ location }}的相關景點：</h1>
+        <div class="box">
+        <div class="weather_row">
+          <el-row>
+            <el-col span="7">{{ location }}</el-col>
+            <el-col span="2" offset="2">{{ degrees }} </el-col>
+            <el-col span="2" offset="2"
+              ><el-image
+                style="width: 30px; height: 30px"
+                :src="weather_icon"
+                :fit="fit"
+                id="weather_img"
+              ></el-image
+            ></el-col>
+          </el-row>
+        </div>
+      </div>
+      <hr class="line_1" />
+            
+            
             <vuescroll>
             <div  v-for="spot in spots" :key="spot.name">
                 
-                    <Spotside :Spot="spot" :username="username"/>      
+                    <Spotside :Spot="spot" :username="username" :weather="weather"/>      
                        
             </div>
             </vuescroll>
-            </div>
+            
             
         </el-drawer>
 
@@ -86,6 +104,9 @@ export default {
             location: '',
             drawer: false,
             username: '',
+            weather:'',
+            weather_icon:"https://i.imgur.com/uhahPmK.png",
+            degree:'',
         }
 
     },
@@ -130,6 +151,8 @@ export default {
             this.drawer = true;
             this.location = value;
             this.getSpot();
+            //this.degrees = this.spots[0].degrees;
+            //this.change_weather_img(this.weather);
         },
         getSpot(){
           axios({
@@ -146,9 +169,32 @@ export default {
               console.log(res.data)
               this.spots = []
               this.spots = res.data.spot_info
+              this.weather = res.data.weather
+              console.log('weather:'+this.weather)
+              console.log('weather_icon:'+this.weather_icon)
+              this.degree = res.data.degree
+              this.change_weather_img(this.weather);
+              console.log('weather_icon:'+this.weather_icon)
                            
             })
         },
+      change_weather_img(weather_desc) {
+      if (weather_desc == "CLOUDY") {
+        this.weather_icon = "https://i.imgur.com/uhahPmK.png";
+      } else if (weather_desc == "RAINY") {
+        this.weather_icon = "https://i.imgur.com/BPoKiYc.png";
+      } else if (weather_desc == "SNOW") {
+        this.weather_icon = "https://i.imgur.com/OFgTy0C.png";
+      } else if (weather_desc == "SHOWERS") {
+        this.weather_icon = "https://i.imgur.com/BtlI7Vi.png";
+      } else if (weather_desc == "CLEAR") {
+        this.weather_icon = "https://i.imgur.com/jsCwuWF.png";
+      } else if (weather_desc == "SUNNY") {
+        this.weather_icon = "https://i.imgur.com/sH1g2c7.png";
+      } else if (weather_desc == "PARTLY_CLOUDY") {
+        this.weather_icon = "https://i.imgur.com/q7l3jHA.png";
+      }
+    },
 
         //send:city
         //recieve:[get] spot,userfavlist
@@ -157,10 +203,6 @@ export default {
 </script>
 
 <style>
-
-.imgarea{
-    background-color: white;
-}
 .spotsection{
     height: 100%;
     overflow:auto;
@@ -171,15 +213,164 @@ export default {
 	
     
 }
+/*
 .city{
     font-size: 3em;
     font-family: "Lucida Console", "Courier New", monospace;
     text-align: left;
     color: #999999;
-}
+}*/
 .stext{
     font-weight:bold;
     font-size: 1.5em;
+}
+.imgarea {
+  background-color: white;
+}
+h1 {
+  background: #90b0ca;
+  font-size: 22px;
+  color: #fff;
+  height: 50px;
+  text-align: center;
+  padding: 10px;
+  margin-top: -25px;
+  margin-bottom: 15px;
+}
+body {
+  font-family: "微軟正黑體";
+}
+.box {
+  line-height: 30px;
+  margin-left: 3%;
+  margin-right: 40%;
+}
+.weather_row {
+  font-size: 20px;
+  margin: 1%;
+  color: #90b0ca;
+  font-weight: bold;
+  height: 30px;
+}
+.line_1 {
+  border: none;
+  border-top: 1px dashed;
+  /* margin-bottom: 10px; */
+  color: #90b0ca;
+  height: 2px;
+  width: 100%;
+}
+@media screen and (max-width: 1150px) {
+  .box {
+    line-height: 30px;
+    margin-left: 3%;
+    margin-right: 25%;
+  }
+}
+@media screen and (max-width: 900px) {
+  .box {
+    line-height: 30px;
+    margin-left: 3%;
+    margin-right: 20%;
+  }
+}
+@media screen and (max-width: 850px) {
+  .box {
+    line-height: 30px;
+    margin-left: 3%;
+    margin-right: 15%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .box {
+    line-height: 30px;
+    margin-left: 3%;
+    margin-right: 12%;
+  }
+}
+@media screen and (max-width: 730px) {
+  .box {
+    line-height: 30px;
+    margin-left: 3%;
+    margin-right: 9%;
+  }
+  .weather_row {
+    font-size: 19px;
+  }
+}
+@media screen and (max-width: 710px) {
+  .box {
+    line-height: 30px;
+    margin-left: 2%;
+    margin-right: 6%;
+  }
+  .weather_row {
+    font-size: 19px;
+  }
+}
+@media screen and (max-width: 650px) {
+  .box {
+    line-height: 30px;
+    margin-left: 1%;
+    margin-right: 2%;
+  }
+  .weather_row {
+    font-size: 18px;
+    margin: 10px;
+  }
+}
+@media screen and (max-width: 635px) {
+  .box {
+    line-height: 30px;
+    margin-left: 8px;
+    margin-right: 5%;
+  }
+  .weather_row {
+    font-size: 17px;
+    margin: 2px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .box {
+    line-height: 30px;
+    margin-left: 8px;
+    margin-right: 8%;
+  }
+  .weather_row {
+    font-size: 15px;
+    margin: 2px;
+  }
+  h1{
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 550px) {
+  .box {
+    line-height: 30px;
+    margin-left: 8px;
+    margin-right: 10%;
+  }
+  .weather_row {
+    font-size: 13px;
+    margin: 2px;
+  }
+  h1{
+    font-size: 19px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .box {
+    line-height: 30px;
+    margin-left: 8px;
+    margin-right: 10%;
+  }
+  .weather_row {
+    font-size: 11px;
+    margin: 2px;
+  }
+  h1{
+    font-size: 17px;
+  }
 }
 
 
