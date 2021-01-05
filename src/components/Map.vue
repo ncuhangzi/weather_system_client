@@ -266,17 +266,6 @@
       </div>
       <hr class="line_1" />
 
-<<<<<<< HEAD
-      <div v-for="spot in spots" :key="spot.name">
-        <!-- 
-          -- Vue陣列 v-for：
-          -- spots：在data()裡為陣列取的名字，
-          -- sopt：是指spots陣列裡的「單筆」資料，取名為spot
-          -- key：陣列中有多筆資料，為各筆資料下key來分辨
-          -- :(冒號)：v-bind的簡寫，完整是v-bind:key=""，屬性綁定的意思，
-                   以該例來說是指「屬性key要帶入資料spot」，
-         -->
-=======
         <el-drawer
         title="相關景點推薦" :visible.sync="drawer" :direction="'ltr'" :before-close="handleClose" :with-header="false" size='50%'>
             <el-row><span class="city">{{location}}</span><span class="stext"> 的熱門景點：</span></el-row>
@@ -291,90 +280,21 @@
             </div>
             
         </el-drawer>
->>>>>>> master
 
         <Spotside :Spot="spot" />
         <!-- 
           子元件Spotside中：設定props: ["Spot"]來接收父層傳來的資料
           父層Map中：先列出component，再把資料(spot)透過Spot 傳遞給子元件 
         -->
-      </div>
+      
     </el-drawer>
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
-import axios from "axios";
-import Spotside from "./Spotside.vue";
-
-export default {
-  components: {
-    Spotside,
-  },
-  data() {
-    return {
-      map: null,
-      lat: 25.0325917,
-      lng: 121.5624999,
-      spots: [
-        {
-          name: "Tokyo Tower",
-          image:
-            "https://img.travel98.com/xl/P_14871_c4a56264d38a3641751286028793f16a_o.jpg",
-          city: "Tokyo",
-          address: "東京都港區芝公園4-2-8",
-          info:
-            "東京鐵塔是位於日本東京芝公園的電波塔。其以巴黎艾菲爾鐵塔為範本而建造，高333公尺，比前者高13公尺，完工以來即成為東京著名地標與觀光景點。正式名稱為日本電波塔，這同時也是其營運機構的舊稱。目前為日本第二高的結構物，僅次於東京晴空塔。1958年，外表一根根交錯複雜像蜘蛛網結構的建築物，開始聳立於東京，成為最耀眼的日本地標「東京鐵塔」，它是廣播電視電波塔，全長高度有333公尺，分成塔下的大樓「Foottown」、「大展望台」即「Main Deck」位於150公尺、「特別展望台」位於250公尺，在經過一段時間的裝修後，將其新命名為「Top Deck」。",
-          count: 0,
-          state: false,
-          weather_desc: "SNOW",
-          degrees: "23.50",
-        },
-        {
-          name: "Tokyo Power",
-          image:
-            "https://img.travel98.com/xl/P_14871_c4a56264d38a3641751286028793f16a_o.jpg",
-          city: "Tokyo",
-          address: "東京都港區芝公園4-2-8",
-          info:
-            "東京鐵塔是位於日本東京芝公園的電波塔。其以巴黎艾菲爾鐵塔為範本而建造，高333公尺，比前者高13公尺，完工以來即成為東京著名地標與觀光景點。正式名稱為日本電波塔，這同時也是其營運機構的舊稱。目前為日本第二高的結構物，僅次於東京晴空塔。1958年，外表一根根交錯複雜像蜘蛛網結構的建築物，開始聳立於東京，成為最耀眼的日本地標「東京鐵塔」，它是廣播電視電波塔，全長高度有333公尺，分成塔下的大樓「Foottown」、「大展望台」即「Main Deck」位於150公尺、「特別展望台」位於250公尺，在經過一段時間的裝修後，將其新命名為「Top Deck」。",
-          count: 0,
-          state: false,
-          weather_desc: "SNOW",
-          degrees: "23.50",
-        },
-      ],
-      location: "",
-      drawer: false,
-      weather_icon: "https://i.imgur.com/uhahPmK.png",
-    };
-  },
-  mounted() {
-    //this.initMap();
-    //this.setMarker();
-  },
-  methods: {
-    // initMap(){
-    //     // 透過 Map 物件建構子建立新地圖 map 物件實例，並將地圖呈現在 id 為 map 的元素中
-    //     this.map = new google.maps.Map(document.getElementById("map"), {
-    //     // 設定地圖的中心點經緯度位置
-    //     center: { lat: this.lat, lng: this.lng },
-    //     // 設定地圖縮放比例 0-20
-    //     zoom: 15,
-    //     // 限制使用者能縮放地圖的最大比例
-    //     maxZoom: 20,
-    //     // 限制使用者能縮放地圖的最小比例
-    //     minZoom: 3,
-    //     // 設定是否呈現右下角街景小人
-    //     streetViewControl: false,
-    //     // 設定是否讓使用者可以切換地圖樣式：一般、衛星圖等
-    //     mapTypeControl: false
-    //     });
-=======
 import axios from 'axios'
 import Spotside from './Spotside.vue'
-import vuescroll from 'vuescroll';
+import vuescroll from 'vuescroll'
 import {API_BASE_URL} from './config.js'
 
 export default {
@@ -385,17 +305,11 @@ export default {
     data(){
         return{
             map: null,
-            lat: 25.0325917,
-            lng: 121.5624999,
-            ops:{
-
-            },
             spots:[],
             location: '',
             drawer: false,
             username: '',
         }
->>>>>>> master
 
     // },
     // setMarker() {
@@ -407,23 +321,7 @@ export default {
     //         map: this.map
     //     });
     // },
-    selectloc(value) {
-      //console.log('current env:'+process.env.WEATHER_API)
-      this.drawer = true;
-      this.location = value;
-      this.getSpot();
-      this.degrees = this.spots[0].degrees;
-      this.change_weather_img(this.spots[0].weather_desc);
     },
-<<<<<<< HEAD
-    getSpot() {
-      axios({
-        method: "get",
-        url: process.env.WEATHER_API + "api/spot",
-        headers: {
-          accessToken: sessionStorage.getItem("accessToken"),
-          location: this.location,
-=======
     mounted(){
       if(this.username == ''){
         this.username = sessionStorage.getItem('username')
@@ -460,12 +358,14 @@ export default {
         //         map: this.map
         //     });
         // },
-        selectloc(value){
-            //console.log('current env:'+process.env.WEATHER_API)
-            this.drawer = true;
-            this.location = value;
-            this.getSpot();
-        },
+    selectloc(value) {
+      //console.log('current env:'+process.env.WEATHER_API)
+      this.drawer = true;
+      this.location = value;
+      this.getSpot();
+      this.degrees = this.spots[0].degrees;
+      this.change_weather_img(this.spots[0].weather_desc);
+    },
         getSpot(){
           axios({
               method: 'get',
@@ -483,16 +383,6 @@ export default {
               this.spots = res.data.spot_info
                            
             })
->>>>>>> master
-        },
-      })
-        .catch(function (error) {
-          // alert(error)
-          console.log(error);
-        })
-        .then((res) => {
-          this.spots = res.data;
-        });
     },
 
     change_weather_img(weather_desc) {
@@ -518,7 +408,6 @@ export default {
 };
 </script>
 
-<<<<<<< HEAD
 <style scoped>
 .google-map {
   width: 100%;
@@ -678,12 +567,6 @@ body {
   h1{
     font-size: 17px;
   }
-=======
-<style>
-
-.imgarea{
-    background-color: white;
->>>>>>> master
 }
 .spotsection{
     height: 100%;
