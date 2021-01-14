@@ -3,7 +3,7 @@
     <section>
         <el-card class="box-card-page" :body-style="{ padding: '10px'}">
         <div slot="header" class="clearfix">
-            <span>{{spotname}}</span>
+            <span class="spotname">{{spotname}}</span>
         </div>
         
 
@@ -34,12 +34,23 @@
         </el-col>
 
         </el-row>
-        <div class="text item">
-            {{city}}
-        </div>
+        <main>
+          <div class="weather">{{ city_name }}</div>
+          <div class="weather icon">
+            <el-image
+              style="width: 30px; height: 30px"
+              :src="weather_icon"
+              :fit="fit"
+              id="weather_img"
+            ></el-image>
+          </div>
+          <div class="weather">{{ degree }} ℃ </div>
+        </main>
+
+        <div class="address">{{ address }}</div>
         <el-divider></el-divider>
-        <div class="text item">
-            {{info}}
+        <div class="info_tx">
+          {{ info }}
         </div>
         </el-card>
     </section>
@@ -57,6 +68,7 @@ export default {
     data (){
         return { 
             content: {},
+            spotid:'',
             spotname: '',
             image: '',
             city: '',
@@ -64,21 +76,31 @@ export default {
             state: false,
             costate: false,
             username:'',
+            weather_icon: "https://i.imgur.com/uhahPmK.png",
+            address: '',
+            weather: '',
+            degree: '',
         }
     },
     beforeMount(){
         //assign the query content to this variables
-        this.content = this.$route.query
-        this.spotname = this.content.spotname
-        this.image = this.content.image
-        this.city = this.content.city
-        this.info = this.content.info
-        this.state = this.content.status
-        this.id = this.content.id
         this.username = sessionStorage.getItem('username')
+        this.content = this.$route.query;
+        this.spotid = this.content.spot_id;
+        this.spotname = this.content.spotname;
+        this.image = this.content.image;
+        this.city = this.content.city_name;
+        this.info = this.content.info;
+        this.state = this.content.state;
+        this.weather = this.content.weather;
+        this.address = this.content.address;
+        this.degree = this.content.degree;
+        
     },
     mounted(){
       if(this.state == 'true'){this.state = true; this.costate = false}else if(this.state == 'false'){this.state = false; this.costate = true}
+      this.change_weather_img(this.weather);
+      console.log('icon:'+this.weather_icon)
     },
     watch:{
       state: function(){
@@ -94,7 +116,7 @@ export default {
       updatestate(){
           axios({
                 method: 'put',
-                url: API_BASE_URL + '/update/'+this.Spot.id+'/'+this.username,
+                url: API_BASE_URL + '/update/'+this.spotid+'/'+this.username,
                 headers : { 
 
                 },
@@ -134,7 +156,24 @@ export default {
             this.updatestate();
 
 
-        }
+        },
+        change_weather_img(weather) {
+            if (weather == "CLOUDY") {
+              this.weather_icon = "https://i.imgur.com/uhahPmK.png";
+            } else if (weather == "RAINY") {
+              this.weather_icon = "https://i.imgur.com/BPoKiYc.png";
+            } else if (weather == "SNOW") {
+              this.weather_icon = "https://i.imgur.com/OFgTy0C.png";
+            } else if (weather == "SHOWERS") {
+              this.weather_icon = "https://i.imgur.com/BtlI7Vi.png";
+            } else if (weather == "CLEAR") {
+              this.weather_icon = "https://i.imgur.com/jsCwuWF.png";
+            } else if (weather == "SUNNY") {
+              this.weather_icon = "https://i.imgur.com/sH1g2c7.png";
+            } else if (weather == "PARTLY_CLOUDY") {
+              this.weather_icon = "https://i.imgur.com/q7l3jHA.png";
+            }
+          },
     },
 
 }

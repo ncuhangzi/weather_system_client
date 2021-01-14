@@ -15,7 +15,7 @@
       </el-col>
 
       <el-col :span="6" >
-          <span class="grid-content"> {{this.nickname}}</span>
+          <span class="grid-content"><n></n> {{nickname}}</span>
       </el-col>
       <el-col :span="4" > 
  
@@ -73,25 +73,24 @@ export default {
             activeIndex: '1',
             nickname:'',
             username:'',
-            routepath: this.$router.routes.path 
         }
 
     },
-    watch:{
-      routepath: function(){
-        if(this.routepath == '/login'){         
-          console.log('you must login first!')
-        }else{
-          //this.mounted
-        }
-      }
+    // watch:{
+    //   routepath: function(){
+    //     if(this.routepath == '/login'){         
+    //       console.log('you must login first!')
+    //     }else{
+    //       //this.mounted
+    //     }
+    //   }
 
-    },
+    // },
     mounted(){
         const Islogin =  sessionStorage.getItem('token');
         this.username = sessionStorage.getItem('username');
         if(Islogin == 'Imlogin'){
-            this.visible = true;
+            //this.visible = true;
             this.getnickname();
         }
     },

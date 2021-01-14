@@ -52,7 +52,7 @@
         <div class="weather_row">
           <el-row>
             <el-col span="7">{{ location }}</el-col>
-            <el-col span="2" offset="2">{{ degrees }} </el-col>
+            <el-col span="2" offset="2">{{ degree }} </el-col>
             <el-col span="2" offset="2"
               ><el-image
                 style="width: 30px; height: 30px"
@@ -70,7 +70,7 @@
             <vuescroll>
             <div class="spotsection" v-for="spot in spots" :key="spot.name">
                 
-                    <Spotside :Spot="spot" :username="username" :weather="weather"/>      
+                    <Spotside :Spot="spot" :username="username" :weather="weather" :degree="degree"/>      
                        
             </div>
             </vuescroll>
@@ -106,7 +106,7 @@ export default {
             username: '',
             weather:'',
             weather_icon:"https://i.imgur.com/uhahPmK.png",
-            degree:'',
+            degree: 0,
         }
 
     },
@@ -173,6 +173,7 @@ export default {
               console.log('weather:'+this.weather)
               console.log('weather_icon:'+this.weather_icon)
               this.degree = res.data.degree
+              console.log('degree:'+this.degree)
               this.change_weather_img(this.weather);
               console.log('weather_icon:'+this.weather_icon)
                            

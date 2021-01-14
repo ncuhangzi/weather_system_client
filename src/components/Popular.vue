@@ -1,7 +1,7 @@
 <template>
 <div>
     <transition name="el-zoom-in-top">
-        <Spot :spots="spots" :username="username"/>        
+        <Spot :spots="spots" :username="username" :degree="degree" :weather="weather"/>        
     </transition>
 
 </div>
@@ -23,6 +23,8 @@ export default {
 
             ],
             username: '',
+            degree: null,
+            weather: '',
 
         }
     },
@@ -49,6 +51,8 @@ export default {
             }).then((res)=>{
                 console.log(res)
               this.spots = res.data
+              this.weather = res.data.weather;
+              this.degree = res.data.degree;
                            
             })
 

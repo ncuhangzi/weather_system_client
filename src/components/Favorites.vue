@@ -20,7 +20,9 @@ export default {
         return{
             spots:[
             ],
-            username: ''
+            username: '',
+            degree: null,
+            weather: '',
 
         }
     },

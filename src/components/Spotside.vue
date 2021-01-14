@@ -5,7 +5,20 @@
 
         
           <div class="box">
-            <a href="javascript:;" @click="toContent(Spot.id, Spot.name, Spot.image, Spot.city, Spot.info, Spot.status, Spot.degree ,weather)">
+            <a href="javascript:;"             
+            @click="
+              toContent(
+                Spot.id,
+                Spot.name,
+                Spot.image,
+                Spot.city_name,
+                Spot.info,
+                Spot.status,
+                degree,
+                weather,
+                Spot.address
+              )
+            ">
             
                 <div class="img_level" style="color: rgb(70, 69, 90)"></div>
                 <div class="img_box">
@@ -55,7 +68,7 @@ import {API_BASE_URL} from './config.js'
 
 export default {
     name:'spotside',
-    props: ["Spot", "username", "weather"],
+    props: ["Spot", "username", "weather", "degree"],
     data(){
         return{
             state: this.Spot.status,
@@ -64,7 +77,7 @@ export default {
         }
     },
     mounted(){
-      //console.log(this.username)
+      console.log(this.degree)
 
       if(this.state == false){this.costate = true}
     },
@@ -122,23 +135,22 @@ export default {
                 })
 
         },
-        toContent  (id, spotname, image, city, info, state, degree, weather){
-                  
-                  this.$router.push({
-                  path : '/spot' , 
-                  query : { 
-                    id: id,
-                    spotname: spotname,
-                    image: image,
-                    city: city,
-                    info: info,
-                    state: state,
-                    degree: degree, 
-                    weather: weather,
-                  }
-                })   
-      
-        },
+        toContent(id, spotname, image, city_name, info, state, degree, weather,address ) {
+              this.$router.push({
+                path: "/spot",
+                query: {
+                  spot_id:id,
+                  spotname: spotname,
+                  image: image,
+                  city_name: city_name,
+                  info: info,
+                  state: state,
+                  address: address,
+                  weather: weather,
+                  degree: degree,
+                },
+              });
+    },
     },
 }
 </script>

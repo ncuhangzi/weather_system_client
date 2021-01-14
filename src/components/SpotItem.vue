@@ -3,7 +3,20 @@
     <transition name="el-zoom-in-top">
        <el-card class="box-card">
          <el-row>
-         <a href="javascript:;" @click="toContent(Spot.id, Spot.name, Spot.image, Spot.city, Spot.info, Spot.status, Spot.degree ,Spot.weather)">
+         <a href="javascript:;" 
+            @click="
+              toContent(
+                Spot.id,
+                Spot.name,
+                Spot.image,
+                Spot.city_name,
+                Spot.info,
+                Spot.status,
+                Spot.address,
+                Spot.weather,
+                Spot.degree
+              )
+            ">
               <el-col :span="6">
                 <div class="imagediv">
                 <el-image
@@ -15,8 +28,14 @@
               </el-col>
               <el-col :span="16">
 
-                <el-row ><el-col :span="10"><span class="spotname">{{Spot.name}}</span></el-col>
-                         <el-col :span="10"><span class="city">{{Spot.city}}</span></el-col>               
+                <el-row ><el-col :span="8"><span class="spotname">{{Spot.name}}</span></el-col>
+                         <el-col :span="12"><span class="city">{{Spot.city}} {{ Spot.degree }}℃             
+              <el-image
+              style="width: 30px; height: 30px"
+              :src="weather_icon"
+              :fit="fit"
+              id="weather_img"
+            ></el-image></span></el-col>               
                 </el-row>
                 <el-row ><div class="info"><v-clamp autoresize :max-lines="5">{{Spot.info}}</v-clamp></div></el-row>
             
@@ -47,7 +66,7 @@ import {API_BASE_URL} from './config.js'
 
 export default {
     name:'spotitem',
-    props: ["Spot", "username"],
+    props: ["Spot", "username","weather", "degree"],
     components: {
       VClamp
     },
@@ -58,10 +77,14 @@ export default {
             costate: this.Spot.status,
             info: this.Spot.info,
             path: '',
+            weather_icon:'https://i.imgur.com/uhahPmK.png',
         }
     },
     mounted(){
       if(this.state == false){this.costate = true}
+      this.change_weather_img(this.Spot.weather)
+      console.log('weather:'+this.Spot.weather)
+      console.log('icon:'+this.weather_icon)
       
     },
     watch:{
@@ -98,23 +121,22 @@ export default {
 
 
         },
-            //send event parameter to the reward page
-        toContent  (id, spotname, image, city, info, state, degree, weather){
-                  
-                  this.$router.push({
-                  path : '/spot' , 
-                  query : { 
-                    id: id,
-                    spotname: spotname,
-                    image: image,
-                    city: city,
-                    info: info,
-                    state: state,
-                    degree: degree, 
-                    weather: weather,
-                  }
-                })   
-      
+    //send event parameter to the reward page
+    toContent(id, spotname, image, city_name, info, state, address, weather, degree) {
+      this.$router.push({
+        path: "/spot",
+        query: {
+          spot_id: id,
+          spotname: spotname,
+          image: image,
+          city_name: city_name,
+          info: info,
+          state: state,
+          address: address,
+          weather: weather,
+          degree: degree,
+        },
+      });
     },
     updatestate(){
               axios({
@@ -134,6 +156,23 @@ export default {
                   })
 
      },
+      change_weather_img(weather) {
+            if (weather == "CLOUDY") {
+              this.weather_icon = "https://i.imgur.com/uhahPmK.png";
+            } else if (weather == "RAINY") {
+              this.weather_icon = "https://i.imgur.com/BPoKiYc.png";
+            } else if (weather == "SNOW") {
+              this.weather_icon = "https://i.imgur.com/OFgTy0C.png";
+            } else if (weather == "SHOWERS") {
+              this.weather_icon = "https://i.imgur.com/BtlI7Vi.png";
+            } else if (weather == "CLEAR") {
+              this.weather_icon = "https://i.imgur.com/jsCwuWF.png";
+            } else if (weather == "SUNNY") {
+              this.weather_icon = "https://i.imgur.com/sH1g2c7.png";
+            } else if (weather == "PARTLY_CLOUDY") {
+              this.weather_icon = "https://i.imgur.com/q7l3jHA.png";
+            }
+          }
 
     },
 }

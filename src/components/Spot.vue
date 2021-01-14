@@ -2,7 +2,7 @@
     <div>
         <div v-for="spot in spots" :key="spot.name">
             <transition name="el-zoom-in-top">
-                <SpotItem :spot="spot" :username="username"/>
+                <SpotItem :spot="spot" :username="username" :degree="degree" :weather="weather"/>
             </transition>
 
         </div>
@@ -19,7 +19,7 @@ export default {
     components: {
         SpotItem
     },
-    props:["spots", "username"]
+    props:["spots", "username", "degree","weather"]
 }
 </script>
 
