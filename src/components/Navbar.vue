@@ -15,7 +15,7 @@
       </el-col>
 
       <el-col :span="6" >
-          <span class="grid-content"><n></n> {{nickname}}</span>
+          <span class="grid-content"><q></q>{{nickname}}</span>
       </el-col>
       <el-col :span="4" > 
  
@@ -167,6 +167,9 @@ export default {
         font-size: 1.5em;
         color: #fff;
         text-decoration: none;
+    }
+    q{
+        color:#99a9bf ;
     }
 
 </style>
