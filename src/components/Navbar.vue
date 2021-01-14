@@ -10,8 +10,12 @@
       </el-col>
       
 
-      <el-col :span="16" >
+      <el-col :span="10" >
           <span class="grid-content"> <h3></h3></span>
+      </el-col>
+
+      <el-col :span="6" >
+          <span class="grid-content"> {{this.nickname}}</span>
       </el-col>
       <el-col :span="4" > 
  
@@ -67,13 +71,28 @@ export default {
             //logourl: "./assets/storm.png"
             visible: true,
             activeIndex: '1',
+            nickname:'',
+            username:'',
+            routepath: this.$router.routes.path 
         }
 
     },
+    watch:{
+      routepath: function(){
+        if(this.routepath == '/login'){         
+          console.log('you must login first!')
+        }else{
+          //this.mounted
+        }
+      }
+
+    },
     mounted(){
-        const Islogin =  sessionStorage.getItem('token') == 'Imlogin';
+        const Islogin =  sessionStorage.getItem('token');
+        this.username = sessionStorage.getItem('username');
         if(Islogin == 'Imlogin'){
             this.visible = true;
+            this.getnickname();
         }
     },
     methods: {
@@ -83,16 +102,40 @@ export default {
         to(path) {
             this.opened = false;
             this.$router.push({path: path});
+        },
+        getnickname(){
+            axios({
+              method: 'get',
+              url: API_BASE_URL + '/member/'+this.username,
+              headers : { 
+
+              },
+            }).catch(function (error) {
+                          // alert(error)
+                          console.log(error);    
+            }).then((res)=>{
+              console.log(res)
+               this.nickname = '歡迎，'+res.data.name
+               //this.gender = res.data.gender
+
+              
+                           
+            })                
         }, 
         logout(){
             sessionStorage.removeItem('token');
             this.$router.push('/login');
+            this.nickname = '';
+            //this.visible = false;
             axios({
               method: 'post',
               url: API_BASE_URL + '/logout',
               headers : {  
  
               },
+              data:{
+                  'email': this.username
+              }
 
             }).catch(function (error) {
                           // alert(error)
@@ -110,9 +153,10 @@ export default {
 
 <style scoped>
     .grid-content {
-        border-radius: 0px;
-        min-height: 60px;
-        background: #cc99ff;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 1em;
+        color: rgb(0, 0, 0);
+        text-decoration: none;
     }
     .logout{
         font-size: 1em;

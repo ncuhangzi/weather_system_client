@@ -46,7 +46,7 @@
         </div>
 
         <el-drawer
-        title="" :visible.sync="drawer" :direction="'ltr'" :before-close="handleClose" :with-header="true" size='50%'>
+        title="" :visible.sync="drawer" :direction="'ltr'" :before-close="handleClose" :with-header="false" size='50%'>
         <h1>{{ location }}的相關景點：</h1>
         <div class="box">
         <div class="weather_row">
@@ -68,7 +68,7 @@
             
             
             <vuescroll>
-            <div  v-for="spot in spots" :key="spot.name">
+            <div class="spotsection" v-for="spot in spots" :key="spot.name">
                 
                     <Spotside :Spot="spot" :username="username" :weather="weather"/>      
                        
@@ -234,7 +234,7 @@ h1 {
   height: 50px;
   text-align: center;
   padding: 10px;
-  margin-top: -25px;
+  margin-top: 0px;
   margin-bottom: 15px;
 }
 body {

@@ -160,12 +160,14 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  
 }
 main > .box {
   /* 項目 */
   flex: none;
   width: 25%;
   margin: 3%;
+  height: 200px;
 }
 .img_level {
   height: 8%;

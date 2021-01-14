@@ -111,6 +111,7 @@ export default {
   mounted() {
     this.checklogin();
     this.gettest();
+    //console.log('router'+this.$router)
   },
   methods: {
     checklogin() {

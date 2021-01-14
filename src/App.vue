@@ -6,7 +6,9 @@
 
         <el-main class="main"><router-view></router-view></el-main>
 
-      
+      <el-footer> 資料來源:
+      <el-link href="https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-008?Authorization=rdec-key-123-45678-011121314&format=JSON" target="_blank" type="primary" :underline="false">亞洲最大最齊全開放資料入口網站Dataportal.asia</el-link>
+      </el-footer>
     </el-container>
   </div>
 </template>
@@ -58,6 +60,13 @@ export default {
     text-align: center;
 
     
+  }
+  .el-footer {
+    background-color: #B3C0D1;
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+    font-size: 1em;
   }
 
 </style>
